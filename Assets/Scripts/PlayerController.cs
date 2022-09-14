@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _shootDamage;
 
     private RaycastHit _hitObject;
-    private TurnsManager turnsManager;
+    public TurnsManager turnsManager; //this is an instantiation of turns Manager, this won't do...See if you can create another type of class?!
     public Stats stats;
 
     private void Start()
