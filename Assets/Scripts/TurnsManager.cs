@@ -48,7 +48,6 @@ public class TurnsManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             NextPlayer();
-            _cameraOrbit.SetTargetTransform(_playerList[playerTurn].transform); // <-- active playerobject transform goes here
             AddTurn();
         }
     }
@@ -66,6 +65,7 @@ public class TurnsManager : MonoBehaviour
         {
             playerTurn = 0;
         }
+        _cameraOrbit.SetTargetTransform(_playerList[playerTurn].transform);
         Debug.Log("NextPlayer was called, player turn is " + playerTurn);
     }
 }

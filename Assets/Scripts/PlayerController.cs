@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     public int playerNumber;
 
     Rigidbody rb;
+    TurnsManager turnsManager;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private int _startingHp; 
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //turnsManager = FindObjectOfType<TurnsManager>(); : Made singleton
+        turnsManager = TurnsManager.GetInstance();
         rb = GetComponent<Rigidbody>();
         stats = new Stats();
         stats.SetHp(_startingHp);
@@ -23,12 +24,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (TurnsManager.GetInstance().playerTurn != playerNumber)
+        if (turnsManager.playerTurn != playerNumber)
         {
             if(stats.GetHp() < 0)
             {
-                Destroy(gameObject);
-                Debug.Log(gameObject.name + " died");
+                Die();
             }
             return;
         }
@@ -38,6 +38,13 @@ public class PlayerController : MonoBehaviour
     void EndTurn()
     {
         TurnsManager.GetInstance().NextPlayer();
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+        turnsManager._playerList.RemoveAt(turnsManager.playerTurn); // don't use player turn... 
+        Debug.Log(gameObject.name + " died");
     }
 
     void ProcessInput()
