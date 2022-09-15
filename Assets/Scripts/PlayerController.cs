@@ -4,20 +4,18 @@ public class PlayerController : MonoBehaviour
 {
     public int playerNumber;
 
-
     Rigidbody rb;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private int _startingHp; 
     [SerializeField] private int _shootDamage;
 
-    private RaycastHit _hitObject;
-    public TurnsManager turnsManager; //this is an instantiation of turns Manager, this won't do...See if you can create another type of class?!
+    //TurnsManager turnsManager; //this is an instantiation of turns Manager, this won't do...See if you can create another type of class? : Made singleton...
     public Stats stats;
 
     private void Start()
     {
-        turnsManager = FindObjectOfType<TurnsManager>();
+        //turnsManager = FindObjectOfType<TurnsManager>(); : Made singleton
         rb = GetComponent<Rigidbody>();
         stats = new Stats();
         stats.SetHp(_startingHp);
@@ -25,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (turnsManager.playerTurn != playerNumber)
+        if (TurnsManager.GetInstance().playerTurn != playerNumber)
         {
             if(stats.GetHp() < 0)
             {
@@ -39,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void EndTurn()
     {
-        turnsManager.NextPlayer();
+        TurnsManager.GetInstance().NextPlayer();
     }
 
     void ProcessInput()
@@ -69,9 +67,11 @@ public class PlayerController : MonoBehaviour
             ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
         }
 
-        if (Input.GetKeyDown(KeyCode.F)) 
-        {
-            EndTurn();
-        }
+        // this can't be here, get's called =to the amount of scripts in project... make input manager separate script? singleton?
+        //if (Input.GetKeyDown(KeyCode.G)) 
+        //{
+        //    Debug.Log("EndTurn was called");
+        //    EndTurn();
+        //}
     }
 }
