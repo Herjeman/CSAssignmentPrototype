@@ -13,7 +13,7 @@ public static class ShootManager
         if (hitSomething && output.transform.gameObject.tag == "Player")
         {
             Debug.Log($"Hit {output.transform.name} at position {output.point}");
-            output.transform.gameObject.GetComponent<PlayerController>().stats.takeDamage(damage);
+            output.transform.gameObject.GetComponentInParent<PlayerController>().stats.TakeDamage(damage);
         }
         else if (hitSomething)
         {

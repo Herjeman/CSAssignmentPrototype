@@ -11,9 +11,9 @@ public class TurnsManager : MonoBehaviour
 
     public List<GameObject> _playerList;
 
-    private CameraOrbit _cameraOrbit;
-    private static TurnsManager instance; // make this a singleton, maybe do this to input manager??
-    private int numberOfPlayers;
+    [SerializeField] private InputManager _inputManager;
+    [SerializeField] private GameObject _activePlayer;
+    private static TurnsManager instance;
 
     private void Awake()
     {
@@ -27,45 +27,48 @@ public class TurnsManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _cameraOrbit = Camera.main.GetComponent<CameraOrbit>();
-        numberOfPlayers = _playerList.Count;
-    }
-
     public static TurnsManager GetInstance()
     {
         return instance;
     }
 
-    public void SetNumberOfPlayers(int amount)
+    private void Start()
     {
-        numberOfPlayers = amount;
+        _activePlayer = _playerList[playerTurn];
     }
 
-    private void Update() //Move this to singleton InputManager??
+    private void Update() //Move this to InputManager??
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             NextPlayer();
-            AddTurn();
         }
     }
 
-    public void AddTurn()
-    {
-        numberOfTurns++;
-    }
 
-    public void NextPlayer()
+    public void NextPlayer(bool playerHasDied=false)
     {
-        playerTurn++;
-        AddTurn();
-        if (playerTurn >= numberOfPlayers)
+        if (!playerHasDied)
+        {
+            playerTurn++;
+            numberOfTurns++;
+        }
+        else if (playerTurn > 0)
+        { 
+            playerTurn--;
+        }
+
+        if (playerTurn >= _playerList.Count)
         {
             playerTurn = 0;
         }
-        _cameraOrbit.SetTargetTransform(_playerList[playerTurn].transform);
+
+        _activePlayer = _playerList[playerTurn];
         Debug.Log("NextPlayer was called, player turn is " + playerTurn);
+    }
+
+    public GameObject GetActivePlayer()
+    {
+        return _activePlayer;
     }
 }

@@ -6,7 +6,7 @@ public class Stats
 {
     private int _hp;
 
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _hp -= damage;
     }

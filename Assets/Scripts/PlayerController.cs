@@ -1,38 +1,87 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public int playerNumber;
 
-    Rigidbody rb;
-    TurnsManager turnsManager;
+    TurnsManager _turnsManager;
+
+    Rigidbody _rb;
+    CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private int _startingHp; 
     [SerializeField] private int _shootDamage;
+    [SerializeField] private float _jumpHeight;
+    [SerializeField] private float _gravityAccelleration = 0.01f;
 
-    //TurnsManager turnsManager; //this is an instantiation of turns Manager, this won't do...See if you can create another type of class? : Made singleton...
+    private float _ySpeed = 0;
     public Stats stats;
+
 
     private void Start()
     {
-        turnsManager = TurnsManager.GetInstance();
-        rb = GetComponent<Rigidbody>();
+        _characterController = GetComponent<CharacterController>();
+        _turnsManager = TurnsManager.GetInstance();
+        _rb = GetComponent<Rigidbody>();
         stats = new Stats();
         stats.SetHp(_startingHp);
     }
 
     void Update()
-    {
-        if (turnsManager.playerTurn != playerNumber)
-        {
-            if(stats.GetHp() < 0)
+    { 
+            if(stats.GetHp() <= 0)
             {
                 Die();
             }
             return;
+    }
+
+    public void FixedUpdate()
+    {
+        if (!_characterController.isGrounded)
+        {
+            _ySpeed += _gravityAccelleration;
         }
-        ProcessInput();
+        else if (_ySpeed > 0)
+        { 
+            _ySpeed = 0; 
+        }
+        _characterController.Move(Vector3.down * _ySpeed); // put both Move calls in one call
+        Debug.Log(gameObject.name + "is grunded = " + _characterController.isGrounded);
+    }
+
+
+    private void Die()
+    {
+        bool died = true;
+        Destroy(gameObject);
+        _turnsManager._playerList.Remove(this.gameObject); // don't use player turn... 
+        _turnsManager.NextPlayer(died);
+        Debug.Log(gameObject.name + " died");
+    }
+
+    public void Move(Vector2 inputVector)
+    {
+        //Debug.Log(gameObject.name + " received a move call: " + inputVector);
+        transform.Rotate(0, inputVector.x * _rotationSpeed, 0);
+        Vector3 moveVector = transform.rotation * new Vector3(0, 0, inputVector.y);
+        _characterController.Move(moveVector * _moveSpeed);
+    }
+
+    public void Shoot()
+    {
+        ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
+    }
+
+    public void Jump()
+    {
+        Debug.Log(_ySpeed);
+        if (_ySpeed > -0.01 && _ySpeed < 0.01)
+        {
+            _ySpeed = -_jumpHeight;
+        }
     }
 
     void EndTurn()
@@ -40,23 +89,16 @@ public class PlayerController : MonoBehaviour
         TurnsManager.GetInstance().NextPlayer();
     }
 
-    private void Die()
-    {
-        Destroy(gameObject);
-        turnsManager._playerList.RemoveAt(turnsManager.playerTurn); // don't use player turn... 
-        Debug.Log(gameObject.name + " died");
-    }
-
     void ProcessInput()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.velocity = transform.forward * _moveSpeed;
+            _rb.velocity = transform.forward * _moveSpeed;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            rb.velocity = -transform.forward * _moveSpeed;
+            _rb.velocity = -transform.forward * _moveSpeed;
         }
 
         if (Input.GetKey(KeyCode.A))
