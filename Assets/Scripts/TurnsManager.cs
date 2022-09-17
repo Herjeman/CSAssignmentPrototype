@@ -41,12 +41,12 @@ public class TurnsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            NextPlayer();
+            UpdateTurn();
         }
     }
 
 
-    public void NextPlayer(bool playerHasDied=false)
+    public void UpdateTurn(bool playerHasDied = false)
     {
         if (!playerHasDied)
         {

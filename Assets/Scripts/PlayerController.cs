@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _shootDamage;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravityAccelleration = 0.01f;
+    public FacialExpressions facialExpressions;
 
     private float _ySpeed = 0;
     public Stats stats;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _turnsManager = TurnsManager.GetInstance();
         _rb = GetComponent<Rigidbody>();
+        facialExpressions = GetComponentInChildren<FacialExpressions>();
+
         stats = new Stats();
         stats.SetHp(_startingHp);
     }
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
         bool died = true;
         Destroy(gameObject);
         _turnsManager._playerList.Remove(this.gameObject); // don't use player turn... 
-        _turnsManager.NextPlayer(died);
+        _turnsManager.UpdateTurn(died);
         Debug.Log(gameObject.name + " died");
     }
 
@@ -73,20 +76,18 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
+        facialExpressions.SetAngryExpression();
     }
 
     public void Jump()
     {
-        Debug.Log(_ySpeed);
-        if (_ySpeed > -0.01 && _ySpeed < 0.01)
-        {
-            _ySpeed = -_jumpHeight;
-        }
+        _ySpeed = -_jumpHeight;
+        facialExpressions.SetConcernedExpression();
     }
 
     void EndTurn()
     {
-        TurnsManager.GetInstance().NextPlayer();
+        TurnsManager.GetInstance().UpdateTurn();
     }
 
     void ProcessInput()
