@@ -38,6 +38,9 @@ public class FacialExpressions : MonoBehaviour
     {
         if (!_isAngry)
         {
+            _eyebrowRight.transform.rotation = _neutralRotationRight;
+            _eyebrowLeft.transform.rotation = _neutralRotationLeft;
+
             _eyebrowRight.transform.Rotate(0, 0, _expressiveRotation);
             _eyebrowLeft.transform.Rotate(0, 0, -_expressiveRotation);
 
@@ -52,6 +55,9 @@ public class FacialExpressions : MonoBehaviour
     {
         if (!_isConcerned)
         {
+            _eyebrowRight.transform.rotation = _neutralRotationRight;
+            _eyebrowLeft.transform.rotation = _neutralRotationLeft;
+
             _eyebrowRight.transform.Rotate(0, 0, -_expressiveRotation);
             _eyebrowLeft.transform.Rotate(0, 0, _expressiveRotation);
 

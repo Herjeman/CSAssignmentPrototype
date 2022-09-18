@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _shootDamage;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravityAccelleration = 0.01f;
-    public FacialExpressions facialExpressions;
+    private FaceSwapper _faceSwapper;
 
     private float _ySpeed = 0;
     public Stats stats;
@@ -26,19 +26,24 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _turnsManager = TurnsManager.GetInstance();
         _rb = GetComponent<Rigidbody>();
-        facialExpressions = GetComponentInChildren<FacialExpressions>();
+        _faceSwapper = GetComponentInChildren<FaceSwapper>();
 
         stats = new Stats();
         stats.SetHp(_startingHp);
     }
 
     void Update()
-    { 
-            if(stats.GetHp() <= 0)
-            {
-                Die();
-            }
-            return;
+    {
+        int hp = stats.GetHp();
+        if(hp <= 0)
+        {
+            Die();
+        }
+        else if(hp < 5)
+        {
+            _faceSwapper.SetConcernedFace();
+        }
+        return;
     }
 
     public void FixedUpdate()
@@ -71,18 +76,19 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, inputVector.x * _rotationSpeed, 0);
         Vector3 moveVector = transform.rotation * new Vector3(0, 0, inputVector.y);
         _characterController.Move(moveVector * _moveSpeed);
+        //_facialExpressions.SetNeutralExpression();
     }
 
     public void Shoot()
     {
         ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
-        facialExpressions.SetAngryExpression();
+        _faceSwapper.SetAngryFace();
     }
 
     public void Jump()
     {
         _ySpeed = -_jumpHeight;
-        facialExpressions.SetConcernedExpression();
+        _faceSwapper.SetNeutralFace();
     }
 
     void EndTurn()
