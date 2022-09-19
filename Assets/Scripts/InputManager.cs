@@ -21,21 +21,19 @@ public class InputManager : MonoBehaviour
         _playerController = activePlayer.GetComponent<PlayerController>();
     }
 
-    private void FixedUpdate()
-    {
-        if (activePlayer != _turnsManager.GetActivePlayer())
-        {
-            activePlayer = _turnsManager.GetActivePlayer();
-            _playerController = activePlayer.GetComponent<PlayerController>();
-        } 
-        _playerController.Move(_moveValue);
-    }
+    //private void FixedUpdate()
+    //{
+    //    UpdateActivePlayer();
+    //    _playerController.inputVector = _moveValue;
+    //}
 
     public void Move(InputAction.CallbackContext context) //also rotates...
     {
-        Debug.Log("Move was called in input manager");
+        UpdateActivePlayer();
         _moveValue = context.ReadValue<Vector2>();
+        _playerController.inputVector = _moveValue;
     }
+
 
     public void Shoot(InputAction.CallbackContext context)
     {
@@ -64,5 +62,14 @@ public class InputManager : MonoBehaviour
     public void ToggleAimMode(InputAction.CallbackContext context)
     {
         Debug.Log("Toggle aim mode was called");
+    }
+
+    private void UpdateActivePlayer()
+    {
+        if (activePlayer != _turnsManager.GetActivePlayer())
+        {
+            activePlayer = _turnsManager.GetActivePlayer();
+            _playerController = activePlayer.GetComponent<PlayerController>();
+        }
     }
 }

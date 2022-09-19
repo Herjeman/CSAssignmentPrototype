@@ -4,9 +4,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int playerNumber;
+    public Vector2 inputVector;
+    public Stats stats;
 
     TurnsManager _turnsManager;
-
     Rigidbody _rb;
     CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
@@ -15,10 +16,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _shootDamage;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravityAccelleration = 0.01f;
+
     private FaceSwapper _faceSwapper;
+    private PlayerAnimations _animations;
 
     private float _ySpeed = 0;
-    public Stats stats;
+    private bool _isGrounded;
+
 
 
     private void Start()
@@ -27,6 +31,7 @@ public class PlayerController : MonoBehaviour
         _turnsManager = TurnsManager.GetInstance();
         _rb = GetComponent<Rigidbody>();
         _faceSwapper = GetComponentInChildren<FaceSwapper>();
+        _animations = GetComponentInChildren<PlayerAnimations>();
 
         stats = new Stats();
         stats.SetHp(_startingHp);
@@ -48,15 +53,8 @@ public class PlayerController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (!_characterController.isGrounded)
-        {
-            _ySpeed += _gravityAccelleration;
-        }
-        else if (_ySpeed > 0)
-        { 
-            _ySpeed = 0; 
-        }
-        _characterController.Move(Vector3.down * _ySpeed); // put both Move calls in one call
+        ApplyGravity();
+        Move();
         Debug.Log(gameObject.name + "is grunded = " + _characterController.isGrounded);
     }
 
@@ -70,13 +68,24 @@ public class PlayerController : MonoBehaviour
         Debug.Log(gameObject.name + " died");
     }
 
-    public void Move(Vector2 inputVector)
+    private void ApplyGravity()
     {
-        //Debug.Log(gameObject.name + " received a move call: " + inputVector);
+        if (!_characterController.isGrounded)
+        {
+            _ySpeed -= _gravityAccelleration;
+        }
+    }
+
+    private bool CheckForGround()
+    {
+        return false;
+    }
+
+    public void Move()
+    {
         transform.Rotate(0, inputVector.x * _rotationSpeed, 0);
-        Vector3 moveVector = transform.rotation * new Vector3(0, 0, inputVector.y);
-        _characterController.Move(moveVector * _moveSpeed);
-        //_facialExpressions.SetNeutralExpression();
+        Vector3 moveVector = transform.rotation * new Vector3(0, _ySpeed, inputVector.y * _moveSpeed);
+        _characterController.Move(moveVector);
     }
 
     public void Shoot()
@@ -87,8 +96,13 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        _ySpeed = -_jumpHeight;
-        _faceSwapper.SetNeutralFace();
+        if (_characterController.isGrounded)
+        {
+            _ySpeed = _jumpHeight;
+            PlayerSounds.GetInstance().PlayJumpSound();
+            _animations.PlayJumpAnimation();
+            _faceSwapper.SetNeutralFace();
+        }
     }
 
     void EndTurn()

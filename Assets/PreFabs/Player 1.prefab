@@ -761,6 +761,8 @@ GameObject:
   - component: {fileID: 2903872343065197368}
   - component: {fileID: 2903872343065197369}
   - component: {fileID: 8811568968843517117}
+  - component: {fileID: 1697092973462477844}
+  - component: {fileID: 7436138309390178311}
   m_Layer: 0
   m_Name: Body
   m_TagString: Player
@@ -868,6 +870,39 @@ MonoBehaviour:
   _angryFace: {fileID: 513513741034457297}
   _concernedFace: {fileID: 6165546654827351971}
   _deadFace: {fileID: 72544291071142335}
+--- !u!95 &1697092973462477844
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903872343065197371}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5cee52c8d643c434faccb85d2feb5558, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7436138309390178311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903872343065197371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd331451b007e940be7edcbbadfa8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1697092973462477844}
 --- !u!1 &2903872343325923862
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,6 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 0
+  inputVector: {x: 0, y: 0}
   _moveSpeed: 0.1
   _rotationSpeed: 4
   _startingHp: 10
