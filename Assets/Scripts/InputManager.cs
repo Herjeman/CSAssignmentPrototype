@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     //public GameObject activePlayer;
     [SerializeField] private GameObject _gameManager;
 
-    private GameObject activePlayer;
+    private GameObject _activePlayer;
     private TurnsManager _turnsManager;
     private PlayerController _playerController;
     private Vector2 _moveValue;
@@ -17,8 +17,8 @@ public class InputManager : MonoBehaviour
     private void Start()
     {        
         _turnsManager = _gameManager.GetComponent<TurnsManager>();
-        activePlayer = _turnsManager.GetActivePlayer();
-        _playerController = activePlayer.GetComponent<PlayerController>();
+        _activePlayer = _turnsManager.GetActivePlayer();
+        _playerController = _activePlayer.GetComponent<PlayerController>();
     }
 
     //private void FixedUpdate()
@@ -37,6 +37,7 @@ public class InputManager : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
+        UpdateActivePlayer();
         if (context.performed)
         {
             Debug.Log("Shoot was called");
@@ -46,6 +47,7 @@ public class InputManager : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+        UpdateActivePlayer();
         if (context.performed)
         {
             Debug.Log("Jump was called");
@@ -66,10 +68,10 @@ public class InputManager : MonoBehaviour
 
     private void UpdateActivePlayer()
     {
-        if (activePlayer != _turnsManager.GetActivePlayer())
+        if (_activePlayer != _turnsManager.GetActivePlayer())
         {
-            activePlayer = _turnsManager.GetActivePlayer();
-            _playerController = activePlayer.GetComponent<PlayerController>();
+            _activePlayer = _turnsManager.GetActivePlayer();
+            _playerController = _activePlayer.GetComponent<PlayerController>();
         }
     }
 }
