@@ -1780,8 +1780,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 510970673}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: Jump
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1963,7 +1963,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9ff0b414ad986d649bff2c418f69d2fe, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2589,7 +2589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2903872343325923858, guid: 0b5b79bbb3cdb5b469ebbcfd25366423, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.3415554
+      value: -0.5112481
       objectReference: {fileID: 0}
     - target: {fileID: 2903872343325923858, guid: 0b5b79bbb3cdb5b469ebbcfd25366423, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2597,7 +2597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2903872343325923858, guid: 0b5b79bbb3cdb5b469ebbcfd25366423, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9398617
+      value: 0.8594332
       objectReference: {fileID: 0}
     - target: {fileID: 2903872343325923858, guid: 0b5b79bbb3cdb5b469ebbcfd25366423, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2609,7 +2609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2903872343325923858, guid: 0b5b79bbb3cdb5b469ebbcfd25366423, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 140.057
+      value: 241.494
       objectReference: {fileID: 0}
     - target: {fileID: 2903872343325923858, guid: 0b5b79bbb3cdb5b469ebbcfd25366423, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

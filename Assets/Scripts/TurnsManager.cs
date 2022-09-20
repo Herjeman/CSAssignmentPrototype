@@ -32,6 +32,9 @@ public class TurnsManager : MonoBehaviour
         return instance;
     }
 
+    public delegate void TurnManagerUpdate();
+    public static event TurnManagerUpdate OnTurnEnd;
+
     private void Start()
     {
         _activePlayer = _playerList[playerTurn];
@@ -64,6 +67,7 @@ public class TurnsManager : MonoBehaviour
         }
 
         _activePlayer = _playerList[playerTurn];
+        OnTurnEnd();
         Debug.Log("NextPlayer was called, player turn is " + playerTurn);
     }
 
@@ -72,3 +76,4 @@ public class TurnsManager : MonoBehaviour
         return _activePlayer;
     }
 }
+

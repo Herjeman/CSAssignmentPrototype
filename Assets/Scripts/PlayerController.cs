@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         ApplyGravity();
         Move();
-        Debug.Log(gameObject.name + "is grunded = " + _characterController.isGrounded);
+        //Debug.Log(gameObject.name + "is grunded = " + _characterController.isGrounded);
     }
 
 

@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
         _turnsManager = _gameManager.GetComponent<TurnsManager>();
         _activePlayer = _turnsManager.GetActivePlayer();
         _playerController = _activePlayer.GetComponent<PlayerController>();
+        TurnsManager.OnTurnEnd += UpdateActivePlayer;
     }
 
     //private void FixedUpdate()
@@ -29,7 +30,7 @@ public class InputManager : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context) //also rotates...
     {
-        UpdateActivePlayer();
+        //UpdateActivePlayer();
         _moveValue = context.ReadValue<Vector2>();
         _playerController.inputVector = _moveValue;
     }
@@ -37,7 +38,7 @@ public class InputManager : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        UpdateActivePlayer();
+        //UpdateActivePlayer();
         if (context.performed)
         {
             Debug.Log("Shoot was called");
@@ -47,7 +48,7 @@ public class InputManager : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        UpdateActivePlayer();
+        //UpdateActivePlayer();
         if (context.performed)
         {
             Debug.Log("Jump was called");
@@ -68,10 +69,12 @@ public class InputManager : MonoBehaviour
 
     private void UpdateActivePlayer()
     {
-        if (_activePlayer != _turnsManager.GetActivePlayer())
-        {
-            _activePlayer = _turnsManager.GetActivePlayer();
-            _playerController = _activePlayer.GetComponent<PlayerController>();
-        }
+        _activePlayer = _turnsManager.GetActivePlayer();
+        _playerController = _activePlayer.GetComponent<PlayerController>();
+    }
+
+    private void OnDestroy()
+    {
+        TurnsManager.OnTurnEnd -= UpdateActivePlayer;
     }
 }
