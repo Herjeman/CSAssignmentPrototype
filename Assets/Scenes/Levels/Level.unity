@@ -159,8 +159,8 @@ MonoBehaviour:
   - {fileID: 652285105}
   - {fileID: 1753110787}
   - {fileID: 538238277}
+  _instructions: {fileID: 11400000, guid: aabde783e388dfa47838b3750c064ddf, type: 2}
   _inputManager: {fileID: 510970673}
-  _activePlayer: {fileID: 0}
 --- !u!4 &46514056
 Transform:
   m_ObjectHideFlags: 0

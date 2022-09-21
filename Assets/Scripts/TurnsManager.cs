@@ -11,8 +11,10 @@ public class TurnsManager : MonoBehaviour
 
     public List<GameObject> _playerList;
 
+    [SerializeField] private LoadInstructionsScriptableObject _instructions;
     [SerializeField] private InputManager _inputManager;
-    [SerializeField] private GameObject _activePlayer;
+
+    private GameObject _activePlayer;
     private static TurnsManager instance;
 
     private void Awake()
@@ -25,6 +27,7 @@ public class TurnsManager : MonoBehaviour
         {
             Destroy(this);
         }
+        Debug.Log(_instructions.message);
     }
 
     public static TurnsManager GetInstance()

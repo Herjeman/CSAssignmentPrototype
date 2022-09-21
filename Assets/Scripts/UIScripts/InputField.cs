@@ -12,7 +12,6 @@ public class InputField: MonoBehaviour
 
     public void ChangeMessage(string msg)
     {
-        Debug.Log(msg);
         _mainMenu.SetMessage(msg);
     }
 }
