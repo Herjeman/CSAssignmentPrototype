@@ -34,7 +34,7 @@ public class RocketBehaviour : MonoBehaviour
         Debug.Log("Rocket hit: " + collision.gameObject.name);
         if (collision.gameObject.transform.parent == null)
         {
-            if (collision.gameObject == _shootingPlayer/* || collision.gameObject.transform.parent.gameObject == _shootingPlayer*/)
+            if (collision.gameObject == _shootingPlayer)
             {
                 return;
             }
@@ -55,8 +55,8 @@ public class RocketBehaviour : MonoBehaviour
 
     private void CheckForHits()
     {
-        Debug.Log("CheckForHits was called");
         Collider[] collidersHit = Physics.OverlapSphere(transform.position, _blastRadius); // detta tar ALLT in range, gör ev. en raycast till träffade object för att se om de är i skydd eller inte!
+        Debug.Log($"CheckForHitsWasCalled, hit {collidersHit.Length} objects within a radius of {_blastRadius} ");
         foreach(Collider collider in collidersHit)
         {
             if (collider.gameObject.tag == "Player")

@@ -1541,6 +1541,7 @@ MonoBehaviour:
   _shootDamage: 2
   _jumpHeight: 0.22
   _gravityAccelleration: 0.01
+  _weaponTiltSpeed: 0
 --- !u!1 &8341737798809215886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3879717954450932220, guid: 16dfa64946d622c43bee82904ea0490d, type: 3}
       propertyPath: _blastRadius
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3879717954450932220, guid: 16dfa64946d622c43bee82904ea0490d, type: 3}
       propertyPath: _turnsManager

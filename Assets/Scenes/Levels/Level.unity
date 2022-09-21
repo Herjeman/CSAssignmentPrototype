@@ -2569,10 +2569,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5539052408921555989, guid: b63c8770836db11409e778f87bb1663a, type: 3}
-      propertyPath: _blastRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5539052408921555989, guid: b63c8770836db11409e778f87bb1663a, type: 3}
       propertyPath: _turnsManager
       value: 
       objectReference: {fileID: 46514054}
