@@ -16,12 +16,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _shootDamage;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravityAccelleration = 0.01f;
+    [SerializeField] private float _weaponTiltSpeed;
 
+    private Bazooka _bazooka;
     private FaceSwapper _faceSwapper;
     private PlayerAnimations _animations;
 
+    private Vector3 _weaponTilt = Vector3.zero;
+    private float _slowMoveSpeed;
+    private float _slowRotationSpeed;
+    private float _fastMoveSpeed;
+    private float _fastRotationSpeed;
     private float _ySpeed = 0;
-    private bool _isGrounded;
+    //private bool _isGrounded;
 
 
 
@@ -32,9 +39,15 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _faceSwapper = GetComponentInChildren<FaceSwapper>();
         _animations = GetComponentInChildren<PlayerAnimations>();
+        _bazooka = GetComponentInChildren<Bazooka>();
 
         stats = new Stats();
         stats.SetHp(_startingHp);
+
+        _slowMoveSpeed = _moveSpeed * 0.25f;
+        _slowRotationSpeed = _rotationSpeed * 0.25f;
+        _fastMoveSpeed = _moveSpeed;
+        _fastRotationSpeed = _rotationSpeed;
     }
 
     void Update()
@@ -48,11 +61,12 @@ public class PlayerController : MonoBehaviour
         {
             _faceSwapper.SetConcernedFace();
         }
-        return;
+
     }
 
     public void FixedUpdate()
     {
+        ApplyBazookaTilt();
         ApplyGravity();
         Move();
         //Debug.Log(gameObject.name + "is grunded = " + _characterController.isGrounded);
@@ -76,9 +90,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool CheckForGround()
+    private void ApplyBazookaTilt()
     {
-        return false;
+        _bazooka.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
     }
 
     public void Move()
@@ -88,10 +102,20 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(moveVector);
     }
 
+    public void StartCharge()
+    {
+        _bazooka.StartCharge();
+        _faceSwapper.SetAngryFace();
+        _rotationSpeed = _slowRotationSpeed;
+        _moveSpeed = _slowMoveSpeed;
+    }
+
     public void Shoot()
     {
-        ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
-        _faceSwapper.SetAngryFace();
+        _bazooka.LaunchRocket();
+        _faceSwapper.SetNeutralFace();
+        _rotationSpeed = _fastRotationSpeed;
+        _moveSpeed = _fastMoveSpeed;
     }
 
     public void Jump()
@@ -103,6 +127,12 @@ public class PlayerController : MonoBehaviour
             _animations.PlayJumpAnimation();
             _faceSwapper.SetNeutralFace();
         }
+    }
+
+    public void TiltWeapon(float direction)
+    {
+        Debug.Log("TiltWeapon was called with value: " + direction);
+        _weaponTilt.x = -direction;
     }
 
     void EndTurn()

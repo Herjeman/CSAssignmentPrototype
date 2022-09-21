@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 
 public class Bazooka  : MonoBehaviour
@@ -7,36 +8,35 @@ public class Bazooka  : MonoBehaviour
     [SerializeField] private GameObject _rocket;
     [SerializeField] private GameObject _chargeIndicator;
     [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private GameObject _turnsManager;
     [SerializeField] private float _charge;
     [SerializeField] private float _force;
+    [SerializeField] private float _blastRadius;
 
     private float _chargeTimer;
     private float _maxCharge = 3;
     private bool _charging;
 
+    //Use this code for when eqiupping bazooka...
+    //private GameObject _turnsManager;
+    //public void Init(GameObject turnsmanager)
+    //{
+    //    _turnsManager = turnsmanager;
+    //}
+
     private void Update()
     {
-        //Debug.Log("Bazooka forward is: " + transform.forward);
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCharge();
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            //Debug.Log($"Launched rocket in {transform.forward} direction at {_force} speed");
-            GameObject rocket = LaunchRocket(transform.forward, _force);
-            rocket.GetComponent<RocketBehaviour>().Init(transform.parent.gameObject);
-        }
         if (_charging)
         {
             ContinueCharging();
         }
     }
 
-    public GameObject LaunchRocket(Vector3 direction, float force)
+    public GameObject LaunchRocket()
     {
         GameObject launchedRocket = Instantiate(_rocket, _spawnPoint.position, transform.rotation);
-        launchedRocket.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
+        launchedRocket.GetComponent<Rigidbody>().AddForce(transform.forward * _force, ForceMode.Impulse);
+        launchedRocket.GetComponent<RocketBehaviour>().Init(transform.parent.gameObject, _turnsManager, _blastRadius);
         _charging = false;
         _chargeIndicator.SetActive(false);
         return launchedRocket;

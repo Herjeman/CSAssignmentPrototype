@@ -10,11 +10,11 @@ public class RocketBehaviour : MonoBehaviour
     [SerializeField] private GameObject _explosion;
 
     private GameObject _shootingPlayer;
+    private GameObject _turnsManager;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        // add turnsmanager OnTurnEnd Event Listener
     }
 
 
@@ -26,32 +26,43 @@ public class RocketBehaviour : MonoBehaviour
         Vector3 newDirection = Vector3.RotateTowards(transform.position, _rotation, 10F, 10F);
         transform.rotation = Quaternion.LookRotation(newDirection);
 
-        Debug.Log($"Rocket forward direction is: {transform.forward}");
+        //Debug.Log($"Rocket forward direction is: {transform.forward}");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
-        if (collision.gameObject == _shootingPlayer || collision.gameObject.transform.parent.gameObject == _shootingPlayer)
+        Debug.Log("Rocket hit: " + collision.gameObject.name);
+        if (collision.gameObject.transform.parent == null)
         {
-            return;
+            if (collision.gameObject == _shootingPlayer/* || collision.gameObject.transform.parent.gameObject == _shootingPlayer*/)
+            {
+                return;
+            }
         }
+
         SpawnExplosionEffect();
         CheckForHits();
         Destroy(this.gameObject);
     }
 
-    public void Init(GameObject player)
+    public void Init(GameObject player, GameObject turnsManager, float blastRadius)
     {
         _shootingPlayer = player;
+        _turnsManager = turnsManager;
+        _blastRadius = blastRadius;
+        TurnsManager.OnTurnEnd += RemoveThis;
     }
 
     private void CheckForHits()
     {
+        Debug.Log("CheckForHits was called");
         Collider[] collidersHit = Physics.OverlapSphere(transform.position, _blastRadius); // detta tar ALLT in range, gör ev. en raycast till träffade object för att se om de är i skydd eller inte!
         foreach(Collider collider in collidersHit)
         {
-            //Debug.Log($"Rocketblast hit {collider.gameObject.name}, at {collider.transform.position}");
+            if (collider.gameObject.tag == "Player")
+            {
+                Debug.Log($"Rocketblast hit {collider.transform.name}, at {collider.transform.position}");
+            }
         }
     }
 
@@ -60,8 +71,13 @@ public class RocketBehaviour : MonoBehaviour
         Instantiate(_explosion, transform.position, Quaternion.identity);
     }
 
+    private void RemoveThis() 
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnDestroy()
     {
-        //Remove listener for end turn
+        TurnsManager.OnTurnEnd -= RemoveThis;
     }
 }

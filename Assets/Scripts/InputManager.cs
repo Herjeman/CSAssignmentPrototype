@@ -22,15 +22,8 @@ public class InputManager : MonoBehaviour
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
     }
 
-    //private void FixedUpdate()
-    //{
-    //    UpdateActivePlayer();
-    //    _playerController.inputVector = _moveValue;
-    //}
-
     public void Move(InputAction.CallbackContext context) //also rotates...
     {
-        //UpdateActivePlayer();
         _moveValue = context.ReadValue<Vector2>();
         _playerController.inputVector = _moveValue;
     }
@@ -38,23 +31,30 @@ public class InputManager : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        //UpdateActivePlayer();
-        if (context.performed)
+        if (context.started)
         {
-            Debug.Log("Shoot was called");
+            _playerController.StartCharge();
+        }
+        else if (context.canceled)
+        {
             _playerController.Shoot();
         }
     }
 
+    public void TiltWeapon(InputAction.CallbackContext context)
+    {
+        //Debug.Log("TiltWeapon was called with value: " + context.ReadValue<float>());
+        _playerController.TiltWeapon(context.ReadValue<float>());
+ 
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
-        //UpdateActivePlayer();
         if (context.performed)
         {
             Debug.Log("Jump was called");
             _playerController?.Jump();
         }
-
     }
 
     public void EndTurn(InputAction.CallbackContext context)
