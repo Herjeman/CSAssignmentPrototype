@@ -1480,7 +1480,7 @@ GameObject:
   - component: {fileID: 8341737797281434435}
   - component: {fileID: 8341737797281434433}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Worm
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1535,13 +1535,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   inputVector: {x: 0, y: 0}
-  _moveSpeed: 0.1
-  _rotationSpeed: 4
+  _moveSpeed: 0.2
+  _rotationSpeed: 2
   _startingHp: 10
   _shootDamage: 2
-  _jumpHeight: 0.22
+  _jumpHeight: 0.2
   _gravityAccelleration: 0.01
-  _weaponTiltSpeed: 0
+  _weaponTiltSpeed: 2
 --- !u!1 &8341737798809215886
 GameObject:
   m_ObjectHideFlags: 0

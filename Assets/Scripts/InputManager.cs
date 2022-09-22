@@ -11,14 +11,14 @@ public class InputManager : MonoBehaviour
 
     private GameObject _activePlayer;
     private TurnsManager _turnsManager;
-    private PlayerController _playerController;
+    private WormController _playerController;
     private Vector2 _moveValue;
 
     private void Start()
     {        
         _turnsManager = _gameManager.GetComponent<TurnsManager>();
-        _activePlayer = _turnsManager.GetActivePlayer();
-        _playerController = _activePlayer.GetComponent<PlayerController>();
+        _activePlayer = _turnsManager.GetActiveWorm();
+        _playerController = _activePlayer.GetComponent<WormController>();
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
     }
 
@@ -69,8 +69,8 @@ public class InputManager : MonoBehaviour
 
     private void UpdateActivePlayer()
     {
-        _activePlayer = _turnsManager.GetActivePlayer();
-        _playerController = _activePlayer.GetComponent<PlayerController>();
+        _activePlayer = _turnsManager.GetActiveWorm();
+        _playerController = _activePlayer.GetComponent<WormController>();
     }
 
     private void OnDestroy()

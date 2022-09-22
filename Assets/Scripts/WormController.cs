@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class WormController : MonoBehaviour
 {
     public int playerNumber;
     public Vector2 inputVector;
@@ -48,6 +47,7 @@ public class PlayerController : MonoBehaviour
         _slowRotationSpeed = _rotationSpeed * 0.25f;
         _fastMoveSpeed = _moveSpeed;
         _fastRotationSpeed = _rotationSpeed;
+        Debug.Log("Worm is alive");
     }
 
     void Update()
@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour
         ApplyBazookaTilt();
         ApplyGravity();
         Move();
-        //Debug.Log(gameObject.name + "is grunded = " + _characterController.isGrounded);
     }
 
 
@@ -77,7 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         bool died = true;
         Destroy(gameObject);
-        _turnsManager._playerList.Remove(this.gameObject); // don't use player turn... 
+        _turnsManager._activeWormsList.Remove(this.gameObject); // Do something in OnDestroy???
         _turnsManager.UpdateTurn(died);
         Debug.Log(gameObject.name + " died");
     }
@@ -135,43 +134,37 @@ public class PlayerController : MonoBehaviour
         _weaponTilt.x = -direction;
     }
 
-    void EndTurn()
-    {
-        TurnsManager.GetInstance().UpdateTurn();
-    }
+//    void EndTurn()
+//    {
+//        TurnsManager.GetInstance().UpdateTurn();
+//    }
 
-    void ProcessInput()
-    {
-        if (Input.GetKey(KeyCode.W))
-        {
-            _rb.velocity = transform.forward * _moveSpeed;
-        }
+//    void ProcessInput()
+//    {
+//        if (Input.GetKey(KeyCode.W))
+//        {
+//            _rb.velocity = transform.forward * _moveSpeed;
+//        }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            _rb.velocity = -transform.forward * _moveSpeed;
-        }
+//        if (Input.GetKey(KeyCode.S))
+//        {
+//            _rb.velocity = -transform.forward * _moveSpeed;
+//        }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(new Vector3(0, -_rotationSpeed, 0));
-        }
+//        if (Input.GetKey(KeyCode.A))
+//        {
+//            transform.Rotate(new Vector3(0, -_rotationSpeed, 0));
+//        }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(new Vector3(0, _rotationSpeed, 0));
-        }
+//        if (Input.GetKey(KeyCode.D))
+//        {
+//            transform.Rotate(new Vector3(0, _rotationSpeed, 0));
+//        }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
-        }
+//        if (Input.GetKeyDown(KeyCode.Space))
+//        {
+//            ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
+//        }
+//    }
 
-        // this can't be here, get's called =to the amount of scripts in project... make input manager separate script? singleton?
-        //if (Input.GetKeyDown(KeyCode.G)) 
-        //{
-        //    Debug.Log("EndTurn was called");
-        //    EndTurn();
-        //}
-    }
 }

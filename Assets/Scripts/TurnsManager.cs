@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// turns manager should instantiate players and save references to each one... or something...
 public class TurnsManager : MonoBehaviour
 {
     public int numberOfTurns;
-    public int playerTurn;
 
-    public List<GameObject> _playerList;
 
-    [SerializeField] private LoadInstructionsScriptableObject _instructions;
+    public List<Player> players;
+    public List<GameObject> _activeWormsList;
+
     [SerializeField] private InputManager _inputManager;
+    [SerializeField] private GameSetUp _gameSetUp;
+    [SerializeField] private Spawner _spawner;
 
-    private GameObject _activePlayer;
     private static TurnsManager instance;
+    private GameObject _activeWorm;
+
+    private Player _currentPlayer;
+    private int _currentPlayerIndex;
 
     private void Awake()
     {
@@ -27,7 +31,6 @@ public class TurnsManager : MonoBehaviour
         {
             Destroy(this);
         }
-        Debug.Log(_instructions.message);
     }
 
     public static TurnsManager GetInstance()
@@ -40,7 +43,11 @@ public class TurnsManager : MonoBehaviour
 
     private void Start()
     {
-        _activePlayer = _playerList[playerTurn];
+        players = _gameSetUp.CreatePlayers();
+        _spawner.SpawnWorms(players);
+        _currentPlayer = players[0];
+        _activeWorm = _currentPlayer.GetWorm();
+        _currentPlayer.NextWorm();
     }
 
     private void Update() //Move this to InputManager??
@@ -54,29 +61,32 @@ public class TurnsManager : MonoBehaviour
 
     public void UpdateTurn(bool playerHasDied = false)
     {
-        if (!playerHasDied)
+        _currentPlayerIndex++;
+        if (_currentPlayerIndex > players.Count - 1)
         {
-            playerTurn++;
-            numberOfTurns++;
-        }
-        else if (playerTurn > 0)
-        { 
-            playerTurn--;
+            _currentPlayerIndex = 0;
         }
 
-        if (playerTurn >= _playerList.Count)
-        {
-            playerTurn = 0;
-        }
+        _currentPlayer = players[_currentPlayerIndex];
+        SkipPlayersWithoutWorms();     
 
-        _activePlayer = _playerList[playerTurn];
+        _activeWorm = _currentPlayer.GetWorm();
+        _currentPlayer.NextWorm();
         OnTurnEnd();
-        Debug.Log("NextPlayer was called, player turn is " + playerTurn);
     }
 
-    public GameObject GetActivePlayer()
+    private void SkipPlayersWithoutWorms()
     {
-        return _activePlayer;
+        while(_currentPlayer.worms.Count <= 0) // make sure to break out of this if all players have no worms...
+        {
+            _currentPlayerIndex++;
+            _currentPlayer = players[_currentPlayerIndex];
+        }
+    }
+
+    public GameObject GetActiveWorm()
+    {
+        return _activeWorm;
     }
 }
 

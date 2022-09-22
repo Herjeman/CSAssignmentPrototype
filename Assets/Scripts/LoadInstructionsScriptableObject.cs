@@ -6,6 +6,14 @@ using UnityEngine;
 
 public class LoadInstructionsScriptableObject : ScriptableObject
 {
-    public List<Player> players;
-    public string message;
+    public int wormsPerPlayer;
+    public List<string> playerNames;
+    public List<Color> colors;
+
+    public void Clear() //maybe use awake or validate or smth here, or just call from end game...
+    {
+        wormsPerPlayer = 0;
+        playerNames = new List<string>();
+        colors = new List<Color>();
+    }
 }
