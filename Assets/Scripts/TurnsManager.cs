@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class TurnsManager : MonoBehaviour
 {
@@ -14,12 +15,18 @@ public class TurnsManager : MonoBehaviour
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private GameSetUp _gameSetUp;
     [SerializeField] private Spawner _spawner;
+    [SerializeField] private GameUI _gameUi;
+
+    [SerializeField] private float _turnTime = 10;
+    [SerializeField] private float _retreatTime = 5;
 
     private static TurnsManager instance;
     private GameObject _activeWorm;
 
     private Player _currentPlayer;
     private int _currentPlayerIndex;
+    private float _timer;
+    private bool _runTurnTimer;
 
     private void Awake()
     {
@@ -40,6 +47,7 @@ public class TurnsManager : MonoBehaviour
 
     public delegate void TurnManagerUpdate();
     public static event TurnManagerUpdate OnTurnEnd;
+    public static event TurnManagerUpdate OnTurnStart;
 
     private void Start()
     {
@@ -48,18 +56,27 @@ public class TurnsManager : MonoBehaviour
         _currentPlayer = players[0];
         _activeWorm = _currentPlayer.GetWorm();
         _currentPlayer.NextWorm();
+        _timer = _turnTime;
+        _runTurnTimer = true;
     }
 
-    private void Update() //Move this to InputManager??
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (_runTurnTimer)
         {
-            UpdateTurn();
+        _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                if (UpdateTurn())
+                {
+                    GameOver(GetWinner());
+                }
+            }
         }
     }
 
 
-    public void UpdateTurn(bool playerHasDied = false)
+    public bool UpdateTurn()
     {
         _currentPlayerIndex++;
         if (_currentPlayerIndex > players.Count - 1)
@@ -68,20 +85,101 @@ public class TurnsManager : MonoBehaviour
         }
 
         _currentPlayer = players[_currentPlayerIndex];
-        SkipPlayersWithoutWorms();     
+        if (CheckForWin())
+        {
+            return true;
+        }
 
-        _activeWorm = _currentPlayer.GetWorm();
+        SkipPlayersWithoutWorms();
+
         _currentPlayer.NextWorm();
+        _activeWorm = _currentPlayer.GetWorm();
+        _timer = _turnTime;
+        StopTurnTimer();
         OnTurnEnd();
+        return false;
     }
 
     private void SkipPlayersWithoutWorms()
     {
-        while(_currentPlayer.worms.Count <= 0) // make sure to break out of this if all players have no worms...
+        Debug.Log($"SkipPlayer was called with player index: {_currentPlayerIndex}, who has {_currentPlayer.worms.Count} worms still alive");
+        while(_currentPlayer.worms.Count <= 0)
         {
             _currentPlayerIndex++;
             _currentPlayer = players[_currentPlayerIndex];
+            if (_currentPlayerIndex > players.Count - 1)
+            {
+                _currentPlayerIndex = 0;
+            }
         }
+    }
+
+    private bool CheckForWin()
+    {
+        bool win = false;
+        int playersLeft = players.Count;
+        foreach (Player player in players)
+        {
+            if (player.worms.Count <= 0)
+            {
+                playersLeft--;
+            }
+        }
+        if (playersLeft <= 1)
+        {
+            win = true;
+        }
+        return win;
+    }
+
+    private Player GetWinner()
+    {
+        Player winner = new Player("Default winner", 42, 0);
+        foreach (Player player in players)
+        {
+            if (player.worms.Count > 0)
+            {
+                winner = player;
+            }
+        }
+        return winner;
+    }
+
+    private void GameOver(Player winner)
+    {
+        _gameUi.gameOverMessage = $"Game over, {winner.playerName} has won the game!";
+        _gameUi.gameIsRunning = false;
+         OnTurnEnd();
+    }
+
+    public void StopTurnTimer()
+    {
+        _runTurnTimer = false;
+    }
+
+    public void StartTurnTimer(bool didAction=false)
+    {
+        if (didAction)
+        {
+            _timer = _retreatTime;
+        }
+        _runTurnTimer = true;
+    }
+
+    public void StartNewTurn()
+    {
+        OnTurnStart();
+        if (CheckForWin())
+        {
+            GameOver(GetWinner());
+        }
+        StartTurnTimer();
+
+    }
+
+    public float GetRemainingTurnTime()
+    {
+        return _timer;
     }
 
     public GameObject GetActiveWorm()

@@ -13,8 +13,8 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        _wormsPerPlayer = 2;
-        _numberOfPlayers = 1;
+        _wormsPerPlayer = 3;
+        _numberOfPlayers = 2;
         _instructions.Clear();
     }
 

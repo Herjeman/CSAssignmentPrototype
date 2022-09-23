@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "StartNewTurn",
+                    "type": "Button",
+                    "id": "2414f335-e07e-467c-8ce1-deda8c8d04fc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -315,6 +324,17 @@
                     "action": "TiltWeapon",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "af8a8b86-d421-4146-80df-87b308b1759f",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "StartNewTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

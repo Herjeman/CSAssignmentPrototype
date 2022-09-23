@@ -325,5 +325,8 @@ MonoBehaviour:
   _rocket: {fileID: 3509873270092043599, guid: 18ff9cbcc200d2e46a9224bdaa64ee6b, type: 3}
   _chargeIndicator: {fileID: 4412560357340336201}
   _spawnPoint: {fileID: 7184884758178697910}
+  _turnsManager: {fileID: 0}
   _charge: 10
   _force: 15
+  _blastRadius: 3
+  _blastBaseDamage: 2

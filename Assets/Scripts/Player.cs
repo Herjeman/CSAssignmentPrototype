@@ -7,7 +7,7 @@ public class Player
     public int playerIndex;
     public int teamSize;
     private int nextWorm;
-    //public Color teamColor = Color.white;
+    public Color teamColor = Color.white;
     public List<GameObject> worms;
 
     public Player (string name, int index, int numberOfWorms)
@@ -31,5 +31,10 @@ public class Player
     {
 
         return worms[nextWorm];
+    }
+
+    public void RemoveDeadWorm(GameObject deadWorm) 
+    {
+        worms.Remove(deadWorm);
     }
 }

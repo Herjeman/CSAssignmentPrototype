@@ -12,17 +12,11 @@ public class Bazooka  : MonoBehaviour
     [SerializeField] private float _charge;
     [SerializeField] private float _force;
     [SerializeField] private float _blastRadius;
+    [SerializeField] private int _blastBaseDamage;
 
     private float _chargeTimer;
     private float _maxCharge = 3;
     private bool _charging;
-
-    //Use this code for when eqiupping bazooka...
-    //private GameObject _turnsManager;
-    //public void Init(GameObject turnsmanager)
-    //{
-    //    _turnsManager = turnsmanager;
-    //}
 
     private void Update()
     {
@@ -36,7 +30,7 @@ public class Bazooka  : MonoBehaviour
     {
         GameObject launchedRocket = Instantiate(_rocket, _spawnPoint.position, transform.rotation);
         launchedRocket.GetComponent<Rigidbody>().AddForce(transform.forward * _force, ForceMode.Impulse);
-        launchedRocket.GetComponent<RocketBehaviour>().Init(transform.parent.gameObject, _turnsManager, _blastRadius);
+        launchedRocket.GetComponent<RocketBehaviour>().Init(transform.parent.gameObject, _turnsManager, _blastRadius, _blastBaseDamage);
         _charging = false;
         _chargeIndicator.SetActive(false);
         return launchedRocket;

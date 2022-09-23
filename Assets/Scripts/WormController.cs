@@ -6,13 +6,10 @@ public class WormController : MonoBehaviour
     public Vector2 inputVector;
     public Stats stats;
 
-    TurnsManager _turnsManager;
-    Rigidbody _rb;
     CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private int _startingHp; 
-    [SerializeField] private int _shootDamage;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravityAccelleration = 0.01f;
     [SerializeField] private float _weaponTiltSpeed;
@@ -20,22 +17,20 @@ public class WormController : MonoBehaviour
     private Bazooka _bazooka;
     private FaceSwapper _faceSwapper;
     private PlayerAnimations _animations;
+    private Player _controllingPlayer;
 
     private Vector3 _weaponTilt = Vector3.zero;
     private float _slowMoveSpeed;
     private float _slowRotationSpeed;
     private float _fastMoveSpeed;
     private float _fastRotationSpeed;
-    private float _ySpeed = 0;
-    //private bool _isGrounded;
-
-
+    private float _ySpeed;
+    private bool _didAction;
+    private int _minimumYLevel = -20; 
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _turnsManager = TurnsManager.GetInstance();
-        _rb = GetComponent<Rigidbody>();
         _faceSwapper = GetComponentInChildren<FaceSwapper>();
         _animations = GetComponentInChildren<PlayerAnimations>();
         _bazooka = GetComponentInChildren<Bazooka>();
@@ -47,7 +42,13 @@ public class WormController : MonoBehaviour
         _slowRotationSpeed = _rotationSpeed * 0.25f;
         _fastMoveSpeed = _moveSpeed;
         _fastRotationSpeed = _rotationSpeed;
-        Debug.Log("Worm is alive");
+
+        TurnsManager.OnTurnEnd += Deactivate;
+    }
+
+    public void Init(Player controllingPlayer)
+    {
+        _controllingPlayer = controllingPlayer;
     }
 
     void Update()
@@ -61,23 +62,28 @@ public class WormController : MonoBehaviour
         {
             _faceSwapper.SetConcernedFace();
         }
-
+        if (transform.position.y < _minimumYLevel)
+        {
+            Die();
+        }
     }
 
     public void FixedUpdate()
     {
-        ApplyBazookaTilt();
         ApplyGravity();
+        ApplyBazookaTilt();
         Move();
     }
 
 
     private void Die()
     {
-        bool died = true;
+        if (TurnsManager.GetInstance().GetActiveWorm() == this.gameObject)
+        {
+            TurnsManager.GetInstance().UpdateTurn();
+        }
+        _controllingPlayer.RemoveDeadWorm(this.gameObject);
         Destroy(gameObject);
-        _turnsManager._activeWormsList.Remove(this.gameObject); // Do something in OnDestroy???
-        _turnsManager.UpdateTurn(died);
         Debug.Log(gameObject.name + " died");
     }
 
@@ -94,7 +100,7 @@ public class WormController : MonoBehaviour
         _bazooka.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
     }
 
-    public void Move()
+    private void Move()
     {
         transform.Rotate(0, inputVector.x * _rotationSpeed, 0);
         Vector3 moveVector = transform.rotation * new Vector3(0, _ySpeed, inputVector.y * _moveSpeed);
@@ -103,18 +109,28 @@ public class WormController : MonoBehaviour
 
     public void StartCharge()
     {
-        _bazooka.StartCharge();
-        _faceSwapper.SetAngryFace();
-        _rotationSpeed = _slowRotationSpeed;
-        _moveSpeed = _slowMoveSpeed;
+        if (!_didAction)
+        {
+            _bazooka.StartCharge();
+            _faceSwapper.SetAngryFace();
+            _rotationSpeed = _slowRotationSpeed;
+            _moveSpeed = _slowMoveSpeed;
+            TurnsManager.GetInstance().StopTurnTimer();
+        }
+
     }
 
     public void Shoot()
     {
-        _bazooka.LaunchRocket();
-        _faceSwapper.SetNeutralFace();
-        _rotationSpeed = _fastRotationSpeed;
-        _moveSpeed = _fastMoveSpeed;
+        if (!_didAction)
+        {
+            _bazooka.LaunchRocket();
+            _faceSwapper.SetNeutralFace();
+            _rotationSpeed = _fastRotationSpeed;
+            _moveSpeed = _fastMoveSpeed;
+            _didAction = true;
+            TurnsManager.GetInstance().StartTurnTimer(_didAction);
+        }
     }
 
     public void Jump()
@@ -130,41 +146,52 @@ public class WormController : MonoBehaviour
 
     public void TiltWeapon(float direction)
     {
-        Debug.Log("TiltWeapon was called with value: " + direction);
         _weaponTilt.x = -direction;
     }
 
-//    void EndTurn()
-//    {
-//        TurnsManager.GetInstance().UpdateTurn();
-//    }
+    private void Deactivate()
+    {
+        _weaponTilt = Vector3.zero;
+        inputVector.x = 0;
+        inputVector.y = 0;
+        _didAction = false;
+    }
 
-//    void ProcessInput()
-//    {
-//        if (Input.GetKey(KeyCode.W))
-//        {
-//            _rb.velocity = transform.forward * _moveSpeed;
-//        }
+    private void OnDestroy()
+    {
+        TurnsManager.OnTurnEnd -= Deactivate;
+    }
+    //    void EndTurn()
+    //    {
+    //        TurnsManager.GetInstance().UpdateTurn();
+    //    }
 
-//        if (Input.GetKey(KeyCode.S))
-//        {
-//            _rb.velocity = -transform.forward * _moveSpeed;
-//        }
+    //    void ProcessInput()
+    //    {
+    //        if (Input.GetKey(KeyCode.W))
+    //        {
+    //            _rb.velocity = transform.forward * _moveSpeed;
+    //        }
 
-//        if (Input.GetKey(KeyCode.A))
-//        {
-//            transform.Rotate(new Vector3(0, -_rotationSpeed, 0));
-//        }
+    //        if (Input.GetKey(KeyCode.S))
+    //        {
+    //            _rb.velocity = -transform.forward * _moveSpeed;
+    //        }
 
-//        if (Input.GetKey(KeyCode.D))
-//        {
-//            transform.Rotate(new Vector3(0, _rotationSpeed, 0));
-//        }
+    //        if (Input.GetKey(KeyCode.A))
+    //        {
+    //            transform.Rotate(new Vector3(0, -_rotationSpeed, 0));
+    //        }
 
-//        if (Input.GetKeyDown(KeyCode.Space))
-//        {
-//            ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
-//        }
-//    }
+    //        if (Input.GetKey(KeyCode.D))
+    //        {
+    //            transform.Rotate(new Vector3(0, _rotationSpeed, 0));
+    //        }
+
+    //        if (Input.GetKeyDown(KeyCode.Space))
+    //        {
+    //            ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
+    //        }
+    //    }
 
 }

@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
             {
                 Transform spawnLocation = _teamSpawns[player.playerIndex].transform.GetChild(i);
                 GameObject newWorm = Instantiate(_worm, spawnLocation.position, spawnLocation.rotation);
+                newWorm.GetComponent<WormController>().Init(player);
 
                 player.worms.Add(newWorm);
                 Debug.Log($"Spawned a worm at {spawnLocation.position}");

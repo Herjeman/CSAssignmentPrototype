@@ -1535,13 +1535,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   inputVector: {x: 0, y: 0}
-  _moveSpeed: 0.2
+  _moveSpeed: 0.15
   _rotationSpeed: 2
-  _startingHp: 10
-  _shootDamage: 2
+  _startingHp: 2
   _jumpHeight: 0.2
   _gravityAccelleration: 0.01
-  _weaponTiltSpeed: 2
+  _weaponTiltSpeed: 1.5
 --- !u!1 &8341737798809215886
 GameObject:
   m_ObjectHideFlags: 0

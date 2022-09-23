@@ -7,6 +7,8 @@ public class RocketBehaviour : MonoBehaviour
     private Vector3 _rotation;
     private Rigidbody _rb;
     private float _blastRadius;
+    private int _baseDamage;
+
     [SerializeField] private GameObject _explosion;
 
     private GameObject _shootingPlayer;
@@ -45,11 +47,12 @@ public class RocketBehaviour : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void Init(GameObject player, GameObject turnsManager, float blastRadius)
+    public void Init(GameObject player, GameObject turnsManager, float blastRadius, int baseDamage)
     {
         _shootingPlayer = player;
         _turnsManager = turnsManager;
         _blastRadius = blastRadius;
+        _baseDamage = baseDamage;
         TurnsManager.OnTurnEnd += RemoveThis;
     }
 
@@ -59,9 +62,11 @@ public class RocketBehaviour : MonoBehaviour
         Debug.Log($"CheckForHitsWasCalled, hit {collidersHit.Length} objects within a radius of {_blastRadius} ");
         foreach(Collider collider in collidersHit)
         {
+            Debug.Log(collider.gameObject.name);
             if (collider.gameObject.tag == "Player")
             {
-                Debug.Log($"Rocketblast hit {collider.transform.name}, at {collider.transform.position}");
+                collider.gameObject.GetComponent<WormController>().stats.TakeDamage(_baseDamage);
+                Debug.Log($"Rocketblast hit {collider.transform.name}, for {_baseDamage} damage");
             }
         }
     }

@@ -6,54 +6,93 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    //public GameObject activePlayer;
     [SerializeField] private GameObject _gameManager;
+    [SerializeField] private GameObject _gameUiObject;
 
-    private GameObject _activePlayer;
+    private GameObject _activeWorms;
     private TurnsManager _turnsManager;
     private WormController _playerController;
+    private GameUI _gameUi;
     private Vector2 _moveValue;
+    private bool _allowWormControl = true;
+    private float _nextPlayerScreenGraceTime = 1;
+    private float _graceTimer;
 
     private void Start()
     {        
         _turnsManager = _gameManager.GetComponent<TurnsManager>();
-        _activePlayer = _turnsManager.GetActiveWorm();
-        _playerController = _activePlayer.GetComponent<WormController>();
+        _activeWorms = _turnsManager.GetActiveWorm();
+        _playerController = _activeWorms.GetComponent<WormController>();
+        _gameUi = _gameUiObject.GetComponent<GameUI>();
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
+        TurnsManager.OnTurnEnd += DisableControl;
+        TurnsManager.OnTurnStart += EnableControl;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_graceTimer > 0)
+        {
+            _graceTimer -= Time.fixedDeltaTime;
+        }
+    }
+
+    public void StartTurn(InputAction.CallbackContext context)
+    {
+        Debug.Log("Any key was pressed");
+        if (!_allowWormControl && _graceTimer <= 0)
+        {
+            Debug.Log($"If statement passed allowWormControl is {_allowWormControl} and gracetimer is {_graceTimer}");
+            if (context.canceled)
+            {
+                _turnsManager.StartNewTurn();
+            }
+        }
+           _gameUi.GoToMainMenu();
     }
 
     public void Move(InputAction.CallbackContext context) //also rotates...
     {
-        _moveValue = context.ReadValue<Vector2>();
-        _playerController.inputVector = _moveValue;
+        if (_allowWormControl)
+        {
+            _moveValue = context.ReadValue<Vector2>();
+            _playerController.inputVector = _moveValue;
+        }
     }
 
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (_allowWormControl)
         {
-            _playerController.StartCharge();
-        }
-        else if (context.canceled)
-        {
-            _playerController.Shoot();
+            if (context.started)
+            {
+                _playerController.StartCharge();
+            }
+            else if (context.canceled)
+            {
+                _playerController.Shoot();
+            }
         }
     }
 
     public void TiltWeapon(InputAction.CallbackContext context)
     {
-        //Debug.Log("TiltWeapon was called with value: " + context.ReadValue<float>());
-        _playerController.TiltWeapon(context.ReadValue<float>());
- 
+        if (_allowWormControl)
+        {
+            _playerController.TiltWeapon(context.ReadValue<float>());
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (_allowWormControl)
         {
-            Debug.Log("Jump was called");
-            _playerController?.Jump();
+            if (context.performed)
+            {
+                Debug.Log("Jump was called");
+                _playerController?.Jump();
+            }
         }
     }
 
@@ -69,12 +108,25 @@ public class InputManager : MonoBehaviour
 
     private void UpdateActivePlayer()
     {
-        _activePlayer = _turnsManager.GetActiveWorm();
-        _playerController = _activePlayer.GetComponent<WormController>();
+        _activeWorms = _turnsManager.GetActiveWorm();
+        _playerController = _activeWorms.GetComponent<WormController>();
+    }
+
+    private void EnableControl()
+    {
+        _allowWormControl = true;
+    }
+
+    private void DisableControl()
+    {
+        _allowWormControl = false;
+        _graceTimer = _nextPlayerScreenGraceTime;
     }
 
     private void OnDestroy()
     {
         TurnsManager.OnTurnEnd -= UpdateActivePlayer;
+        TurnsManager.OnTurnEnd -= DisableControl;
+        TurnsManager.OnTurnStart -= EnableControl;
     }
 }
