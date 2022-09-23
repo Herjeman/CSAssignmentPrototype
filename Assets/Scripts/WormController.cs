@@ -84,7 +84,6 @@ public class WormController : MonoBehaviour
         }
         _controllingPlayer.RemoveDeadWorm(this.gameObject);
         Destroy(gameObject);
-        Debug.Log(gameObject.name + " died");
     }
 
     private void ApplyGravity()

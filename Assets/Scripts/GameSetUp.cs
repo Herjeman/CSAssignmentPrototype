@@ -11,7 +11,7 @@ public class GameSetUp : MonoBehaviour
         _players = new List<Player>();
         foreach (string name in _instructions.playerNames)
         {
-            Player player = new Player(name, _players.Count, _instructions.wormsPerPlayer);
+            Player player = new Player(name, _players.Count, _instructions.wormsPerPlayer, _instructions.colors[_players.Count]);
             _players.Add(player);
         }
         return _players;

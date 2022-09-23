@@ -134,7 +134,7 @@ public class TurnsManager : MonoBehaviour
 
     private Player GetWinner()
     {
-        Player winner = new Player("Default winner", 42, 0);
+        Player winner = new Player("Default winner", 42, 0, Color.white);
         foreach (Player player in players)
         {
             if (player.worms.Count > 0)

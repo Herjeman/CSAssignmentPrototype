@@ -8,6 +8,8 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private LoadInstructionsScriptableObject _instructions;
     [SerializeField] private List<GameObject> _playerInputLines;
+    [SerializeField] private List<Color> _colors;
+
     private int _wormsPerPlayer;
     private int _numberOfPlayers;
 
@@ -22,14 +24,16 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log($"Starting game with {_numberOfPlayers} players");
         List<string> names = new List<string>();
+        List<Color> colors = new List<Color>();
 
         for (int i = 0; i < _numberOfPlayers; i++)
         {
             names.Add(_playerInputLines[i].GetComponent<NameInputField>().GetName());
-            Debug.Log(i);
+            colors.Add(_colors[i]);
         }
         _instructions.wormsPerPlayer = _wormsPerPlayer;
         _instructions.playerNames = names;
+        _instructions.colors = colors;
         SceneManager.LoadScene("Level");
     }
 

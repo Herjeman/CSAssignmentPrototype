@@ -7,14 +7,15 @@ public class Player
     public int playerIndex;
     public int teamSize;
     private int nextWorm;
-    public Color teamColor = Color.white;
+    public Color teamColor;
     public List<GameObject> worms;
 
-    public Player (string name, int index, int numberOfWorms)
+    public Player (string name, int index, int numberOfWorms, Color color)
     {
         playerIndex = index;
         playerName = name;
         teamSize = numberOfWorms;
+        teamColor = color;
         worms = new List<GameObject>();
     }
 
