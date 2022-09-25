@@ -93,7 +93,7 @@ public class TurnsManager : MonoBehaviour
     private void NextPlayer()
     {
         _currentPlayerIndex++;
-        if (_currentPlayerIndex > players.Count - 1)
+        if (_currentPlayerIndex >= players.Count)
         {
             _currentPlayerIndex = 0;
         }
@@ -103,7 +103,7 @@ public class TurnsManager : MonoBehaviour
         while(_currentPlayer.worms.Count <= 0)
         {
             _currentPlayerIndex++;
-            if (_currentPlayerIndex > players.Count - 1)
+            if (_currentPlayerIndex >= players.Count)
             {
                 _currentPlayerIndex = 0;
             }

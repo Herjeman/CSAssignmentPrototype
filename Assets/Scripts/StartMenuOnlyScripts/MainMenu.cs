@@ -21,6 +21,8 @@ public class MainMenu : MonoBehaviour
         _numberOfPlayers = 2;
         _instructions.Clear();
         _numberOfWormsText.SetText(_wormsPerPlayer.ToString());
+        ColorSelector.SetColorList(_colors);
+        ColorSelector.unavailableIndexes = new List<int>();
     }
 
     public void StartGame()
@@ -31,8 +33,9 @@ public class MainMenu : MonoBehaviour
 
         for (int i = 0; i < _numberOfPlayers; i++)
         {
-            names.Add(_playerInputLines[i].GetComponent<NameInputField>().GetName());
-            colors.Add(_colors[i]);
+            NameInputField inputField = _playerInputLines[i].GetComponent<NameInputField>();
+            names.Add(inputField.GetName());
+            colors.Add(inputField.GetColor());
         }
         _instructions.wormsPerPlayer = _wormsPerPlayer;
         _instructions.playerNames = names;
