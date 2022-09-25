@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TurnsManager : MonoBehaviour
 {
@@ -78,19 +75,12 @@ public class TurnsManager : MonoBehaviour
 
     public bool UpdateTurn()
     {
-        _currentPlayerIndex++;
-        if (_currentPlayerIndex > players.Count - 1)
-        {
-            _currentPlayerIndex = 0;
-        }
-
-        _currentPlayer = players[_currentPlayerIndex];
         if (CheckForWin())
         {
             return true;
         }
 
-        SkipPlayersWithoutWorms();
+        NextPlayer();
 
         _currentPlayer.NextWorm();
         _activeWorm = _currentPlayer.GetWorm();
@@ -100,17 +90,24 @@ public class TurnsManager : MonoBehaviour
         return false;
     }
 
-    private void SkipPlayersWithoutWorms()
+    private void NextPlayer()
     {
-        Debug.Log($"SkipPlayer was called with player index: {_currentPlayerIndex}, who has {_currentPlayer.worms.Count} worms still alive");
+        _currentPlayerIndex++;
+        if (_currentPlayerIndex > players.Count - 1)
+        {
+            _currentPlayerIndex = 0;
+        }
+        _currentPlayer = players[_currentPlayerIndex];
+
+        //Skip players with no worms left
         while(_currentPlayer.worms.Count <= 0)
         {
             _currentPlayerIndex++;
-            _currentPlayer = players[_currentPlayerIndex];
             if (_currentPlayerIndex > players.Count - 1)
             {
                 _currentPlayerIndex = 0;
             }
+            _currentPlayer = players[_currentPlayerIndex];
         }
     }
 
