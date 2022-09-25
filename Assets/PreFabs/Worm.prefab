@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6758791907744210512
 Transform:
   m_ObjectHideFlags: 0
@@ -1834,6 +1834,10 @@ PrefabInstance:
     - target: {fileID: 8591936635429019708, guid: 16dfa64946d622c43bee82904ea0490d, type: 3}
       propertyPath: m_Name
       value: Bazooka
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591936635429019708, guid: 16dfa64946d622c43bee82904ea0490d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16dfa64946d622c43bee82904ea0490d, type: 3}

@@ -43,6 +43,8 @@ public class WormController : MonoBehaviour
         _fastMoveSpeed = _moveSpeed;
         _fastRotationSpeed = _rotationSpeed;
 
+        _faceSwapper.SetNeutralFace();
+
         TurnsManager.OnTurnEnd += Deactivate;
     }
 
