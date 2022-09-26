@@ -174,9 +174,9 @@ public class TurnsManager : MonoBehaviour
 
     }
 
-    public float GetRemainingTurnTime()
+    public int GetRemainingTurnTime()
     {
-        return _timer;
+        return ((int)_timer);
     }
 
     public GameObject GetActiveWorm()

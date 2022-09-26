@@ -38,7 +38,7 @@ public class WormController : MonoBehaviour
         stats = new Stats();
         stats.SetHp(_startingHp);
 
-        _slowMoveSpeed = _moveSpeed * 0.25f;
+        _slowMoveSpeed = _moveSpeed * 0f; // replace this with changing the bazooka, so it fires automatically at full charge
         _slowRotationSpeed = _rotationSpeed * 0.25f;
         _fastMoveSpeed = _moveSpeed;
         _fastRotationSpeed = _rotationSpeed;
@@ -60,7 +60,7 @@ public class WormController : MonoBehaviour
         {
             Die();
         }
-        else if(hp < 5)
+        else if(hp < 3)
         {
             _faceSwapper.SetConcernedFace();
         }

@@ -38,7 +38,7 @@ public class CameraOrbit : MonoBehaviour
         _cameraPosition = _targetTransform.position + _offset * _cameraDistance;
 
         transform.position = _cameraPosition;
-        transform.LookAt(_targetTransform.position); // maybe Lerp this
+        transform.LookAt(_targetTransform.position); // maybe Lerp this?
     }
 
     private void UpdateActivePlayer()

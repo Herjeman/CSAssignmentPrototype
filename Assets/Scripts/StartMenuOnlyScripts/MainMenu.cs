@@ -25,6 +25,12 @@ public class MainMenu : MonoBehaviour
         ColorSelector.unavailableIndexes = new List<int>();
     }
 
+    private void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void StartGame()
     {
         Debug.Log($"Starting game with {_numberOfPlayers} players");
@@ -40,6 +46,9 @@ public class MainMenu : MonoBehaviour
         _instructions.wormsPerPlayer = _wormsPerPlayer;
         _instructions.playerNames = names;
         _instructions.colors = colors;
+        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("Level");
     }
 

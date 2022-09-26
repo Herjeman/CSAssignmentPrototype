@@ -1537,7 +1537,7 @@ MonoBehaviour:
   inputVector: {x: 0, y: 0}
   _moveSpeed: 0.15
   _rotationSpeed: 2
-  _startingHp: 10
+  _startingHp: 6
   _jumpHeight: 0.2
   _gravityAccelleration: 0.01
   _weaponTiltSpeed: 1.5

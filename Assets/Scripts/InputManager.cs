@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
 
     private GameObject _activeWorms;
     private TurnsManager _turnsManager;
-    private WormController _playerController;
+    private WormController _wormController;
     private GameUI _gameUi;
     private Vector2 _moveValue;
     private bool _allowWormControl = true;
@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
     {        
         _turnsManager = _gameManager.GetComponent<TurnsManager>();
         _activeWorms = _turnsManager.GetActiveWorm();
-        _playerController = _activeWorms.GetComponent<WormController>();
+        _wormController = _activeWorms.GetComponent<WormController>();
         _gameUi = _gameUiObject.GetComponent<GameUI>();
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
         TurnsManager.OnTurnEnd += DisableControl;
@@ -56,7 +56,7 @@ public class InputManager : MonoBehaviour
         if (_allowWormControl)
         {
             _moveValue = context.ReadValue<Vector2>();
-            _playerController.inputVector = _moveValue;
+            _wormController.inputVector = _moveValue;
         }
     }
 
@@ -67,11 +67,11 @@ public class InputManager : MonoBehaviour
         {
             if (context.started)
             {
-                _playerController.StartCharge();
+                _wormController.StartCharge();
             }
             else if (context.canceled)
             {
-                _playerController.Shoot();
+                _wormController.Shoot();
             }
         }
     }
@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour
     {
         if (_allowWormControl)
         {
-            _playerController.TiltWeapon(context.ReadValue<float>());
+            _wormController.TiltWeapon(context.ReadValue<float>());
         }
     }
 
@@ -91,7 +91,7 @@ public class InputManager : MonoBehaviour
             if (context.performed)
             {
                 Debug.Log("Jump was called");
-                _playerController?.Jump();
+                _wormController?.Jump();
             }
         }
     }
@@ -109,7 +109,7 @@ public class InputManager : MonoBehaviour
     private void UpdateActivePlayer()
     {
         _activeWorms = _turnsManager.GetActiveWorm();
-        _playerController = _activeWorms.GetComponent<WormController>();
+        _wormController = _activeWorms.GetComponent<WormController>();
     }
 
     private void EnableControl()
