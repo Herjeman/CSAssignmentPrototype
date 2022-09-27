@@ -64,7 +64,10 @@ public class RocketBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "Player")
             {
                 collider.gameObject.GetComponent<WormController>().TakeDamage(_baseDamage);
-                //Debug.Log($"Rocketblast hit {collider.transform.name}, for {_baseDamage} damage");
+            }
+            else if (collider.gameObject.tag == "Destructible")
+            {
+                //Collider.gameObject.GetComponent<>
             }
         }
     }
