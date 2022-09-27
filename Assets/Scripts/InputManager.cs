@@ -39,10 +39,8 @@ public class InputManager : MonoBehaviour
 
     public void StartTurn(InputAction.CallbackContext context)
     {
-        Debug.Log("Any key was pressed");
         if (!_allowWormControl && _graceTimer <= 0)
         {
-            Debug.Log($"If statement passed allowWormControl is {_allowWormControl} and gracetimer is {_graceTimer}");
             if (context.canceled)
             {
                 _turnsManager.StartNewTurn();

@@ -33,7 +33,6 @@ public class RocketBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Rocket hit: " + collision.gameObject.name);
         if (collision.gameObject.transform.parent == null)
         {
             if (collision.gameObject == _shootingPlayer)
