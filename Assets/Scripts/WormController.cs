@@ -80,7 +80,6 @@ public class WormController : MonoBehaviour
 
     public void InitializeDying()
     {
-
         _faceSwapper.SetDeadFace();
         _animations.PlayDeathAnimation();
     }
@@ -125,7 +124,6 @@ public class WormController : MonoBehaviour
             _moveSpeed = _slowMoveSpeed;
             TurnsManager.GetInstance().StopTurnTimer();
         }
-
     }
 
     public void Shoot()

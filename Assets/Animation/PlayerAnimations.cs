@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject _deathParticles;
 
     private WormController _myWorm;
 
@@ -26,6 +27,11 @@ public class PlayerAnimations : MonoBehaviour
     public void PlayDeathAnimation()
     {
         _animator.SetTrigger("DeathTrigger");
+    }
+
+    public void SpawnDeathParticles()
+    {
+        _deathParticles.SetActive(true);
     }
 
     public void Die()
