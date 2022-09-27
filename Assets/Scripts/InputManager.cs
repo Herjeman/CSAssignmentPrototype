@@ -96,14 +96,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void EndTurn(InputAction.CallbackContext context)
+    public void ToggleControlsUI(InputAction.CallbackContext context)
     {
-        Debug.Log("End turn was called");
-    }
+        if (context.performed)
+        {
+            _gameUi.ToggleControlsExplanation();
+        }
 
-    public void ToggleAimMode(InputAction.CallbackContext context)
-    {
-        Debug.Log("Toggle aim mode was called");
     }
 
     private void UpdateActivePlayer()

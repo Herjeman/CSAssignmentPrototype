@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: LoadInstructions 1
   m_EditorClassIdentifier: 
   wormsPerPlayer: 0
-  playerNames:
-  - 
+  playerNames: []
   colors: []

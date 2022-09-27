@@ -11,6 +11,8 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject _nextPlayerScreen;
     [SerializeField] private GameObject _gameOverScreen;
     [SerializeField] private GameObject _gameOverTextObject;
+    [SerializeField] private GameObject _controlsExplanation;
+    [SerializeField] private GameObject _showControlsPrompt;
 
 
     public bool gameIsRunning = true;
@@ -27,9 +29,24 @@ public class GameUI : MonoBehaviour
         TurnsManager.OnTurnStart += HideNextPlayerScreen;
     }
 
-    private void HideControlsExplains()
+    public void ToggleControlsExplanation()
     {
+        if (_controlsExplanation.activeInHierarchy)
+        {
+            _controlsExplanation.SetActive(false);
+            _showControlsPrompt.SetActive(true);
+        }
+        else
+        {
+            _controlsExplanation.SetActive(true);
+            _showControlsPrompt.SetActive(false);
+        }
 
+    }
+
+    public void ShowControlsExplanation()
+    {
+        _controlsExplanation.SetActive(true);
     }
 
     private void HideNextPlayerScreen()

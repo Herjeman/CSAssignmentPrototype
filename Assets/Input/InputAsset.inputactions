@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleControlsExplanation",
+                    "type": "Button",
+                    "id": "82de8e12-9be4-41f4-9352-bacab864c982",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -366,6 +375,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "StartNewTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d9a6570-4da8-4e94-91d2-997c94ae79fd",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleControlsExplanation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
