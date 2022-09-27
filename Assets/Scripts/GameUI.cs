@@ -27,6 +27,10 @@ public class GameUI : MonoBehaviour
         TurnsManager.OnTurnStart += HideNextPlayerScreen;
     }
 
+    private void HideControlsExplains()
+    {
+
+    }
 
     private void HideNextPlayerScreen()
     {
