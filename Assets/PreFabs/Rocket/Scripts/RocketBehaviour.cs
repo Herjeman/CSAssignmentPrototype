@@ -67,7 +67,7 @@ public class RocketBehaviour : MonoBehaviour
             }
             else if (collider.gameObject.tag == "Destructible")
             {
-                //Collider.gameObject.GetComponent<>
+                collider.gameObject.GetComponent<Destructible>().TakeDamage(_baseDamage);
             }
         }
     }

@@ -16,7 +16,7 @@ public class Destructible : MonoBehaviour
     public void TakeDamage(int damage)
     {
         stats.TakeDamage(damage);
-        if (stats.GetHp() < 0)
+        if (stats.GetHp() <= 0)
         {
             Destroy(this.gameObject);
         }
