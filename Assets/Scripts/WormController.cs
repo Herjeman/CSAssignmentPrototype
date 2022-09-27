@@ -44,6 +44,7 @@ public class WormController : MonoBehaviour
         _fastRotationSpeed = _rotationSpeed;
 
         _faceSwapper.SetNeutralFace();
+        _animations.Init(this);
 
         TurnsManager.OnTurnEnd += Deactivate;
     }
@@ -58,7 +59,7 @@ public class WormController : MonoBehaviour
         int hp = stats.GetHp();
         if(hp <= 0)
         {
-            Die();
+            InitializeDying();
         }
         else if(hp < 3)
         {
@@ -77,8 +78,14 @@ public class WormController : MonoBehaviour
         Move();
     }
 
+    public void InitializeDying()
+    {
 
-    private void Die()
+        _faceSwapper.SetDeadFace();
+        _animations.PlayDeathAnimation();
+    }
+
+    public void Die()
     {
         if (TurnsManager.GetInstance().GetActiveWorm() == this.gameObject)
         {
@@ -150,6 +157,14 @@ public class WormController : MonoBehaviour
         _weaponTilt.x = -direction;
     }
 
+    public void TakeDamage(int damage)
+    {
+        stats.TakeDamage(damage);
+        _faceSwapper.SetConcernedFace();
+        _animations.PlayDamageAnimation();
+
+    }
+
     private void Deactivate()
     {
         _weaponTilt = Vector3.zero;
@@ -162,37 +177,4 @@ public class WormController : MonoBehaviour
     {
         TurnsManager.OnTurnEnd -= Deactivate;
     }
-    //    void EndTurn()
-    //    {
-    //        TurnsManager.GetInstance().UpdateTurn();
-    //    }
-
-    //    void ProcessInput()
-    //    {
-    //        if (Input.GetKey(KeyCode.W))
-    //        {
-    //            _rb.velocity = transform.forward * _moveSpeed;
-    //        }
-
-    //        if (Input.GetKey(KeyCode.S))
-    //        {
-    //            _rb.velocity = -transform.forward * _moveSpeed;
-    //        }
-
-    //        if (Input.GetKey(KeyCode.A))
-    //        {
-    //            transform.Rotate(new Vector3(0, -_rotationSpeed, 0));
-    //        }
-
-    //        if (Input.GetKey(KeyCode.D))
-    //        {
-    //            transform.Rotate(new Vector3(0, _rotationSpeed, 0));
-    //        }
-
-    //        if (Input.GetKeyDown(KeyCode.Space))
-    //        {
-    //            ShootManager.Shoot(transform.position, transform.forward, _shootDamage);
-    //        }
-    //    }
-
 }

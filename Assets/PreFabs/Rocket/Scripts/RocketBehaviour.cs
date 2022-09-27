@@ -59,14 +59,12 @@ public class RocketBehaviour : MonoBehaviour
     private void CheckForHits()
     {
         Collider[] collidersHit = Physics.OverlapSphere(transform.position, _blastRadius); // detta tar ALLT in range, gör ev. en raycast till träffade object för att se om de är i skydd eller inte!
-        Debug.Log($"CheckForHitsWasCalled, hit {collidersHit.Length} objects within a radius of {_blastRadius} ");
         foreach(Collider collider in collidersHit)
         {
-            Debug.Log(collider.gameObject.name);
             if (collider.gameObject.tag == "Player")
             {
-                collider.gameObject.GetComponent<WormController>().stats.TakeDamage(_baseDamage);
-                Debug.Log($"Rocketblast hit {collider.transform.name}, for {_baseDamage} damage");
+                collider.gameObject.GetComponent<WormController>().TakeDamage(_baseDamage);
+                //Debug.Log($"Rocketblast hit {collider.transform.name}, for {_baseDamage} damage");
             }
         }
     }
