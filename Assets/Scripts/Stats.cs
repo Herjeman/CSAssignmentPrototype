@@ -5,6 +5,9 @@ using UnityEngine;
 public class Stats
 {
     private int _hp;
+    private int _maxHp;
+    
+   
 
     public void TakeDamage(int damage)
     {
@@ -16,6 +19,11 @@ public class Stats
         return _hp;
     }
 
+    public float GetNormalizedHp()
+    {
+        return _hp / _maxHp;
+    }
+    
     public void SetHp(int newHp)
     {
         _hp = newHp;

@@ -5,7 +5,7 @@ public class WormController : MonoBehaviour
     public int playerNumber;
     public Vector2 inputVector;
     public Stats stats;
-
+    
     CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
