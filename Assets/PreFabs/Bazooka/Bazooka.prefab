@@ -329,4 +329,4 @@ MonoBehaviour:
   _charge: 10
   _force: 15
   _blastRadius: 3
-  _blastBaseDamage: 2
+  _blastBaseDamage: 50
