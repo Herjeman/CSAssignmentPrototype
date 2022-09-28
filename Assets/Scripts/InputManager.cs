@@ -88,8 +88,7 @@ public class InputManager : MonoBehaviour
         {
             if (context.performed)
             {
-                Debug.Log("Jump was called");
-                _wormController?.Jump();
+                _wormController.Jump();
             }
         }
     }

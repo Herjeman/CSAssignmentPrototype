@@ -64,11 +64,16 @@ public class RocketBehaviour : MonoBehaviour
             {
                 Impact impact = ImpactCalculator.GetImpact(transform.position, collider.ClosestPoint(transform.position), _blastRadius);
                 float damage = _baseDamage * impact.intensity;
-                collider.gameObject.GetComponent<WormController>().TakeDamage(((int)damage));
+
+                WormController hitWorm = collider.gameObject.GetComponent<WormController>();
+                hitWorm.TakeDamage(((int)damage));
+                hitWorm.ApplyKnockback(impact.direction, impact.intensity);              
             }
             else if (collider.gameObject.tag == "Destructible")
             {
-                collider.gameObject.GetComponent<Destructible>().TakeDamage(_baseDamage);
+                Impact impact = ImpactCalculator.GetImpact(transform.position, collider.ClosestPoint(transform.position), _blastRadius);
+                float damage = _baseDamage * impact.intensity;
+                collider.gameObject.GetComponent<Destructible>().TakeDamage(((int)damage));
             }
         }
     }

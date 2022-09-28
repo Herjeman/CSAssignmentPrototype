@@ -13,6 +13,7 @@ public class WormController : MonoBehaviour
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravityAccelleration = 0.01f;
     [SerializeField] private float _weaponTiltSpeed;
+    [SerializeField][Range(0f, 1f)] private float _frictionIntensity;
 
     private Bazooka _bazooka;
     private FaceSwapper _faceSwapper;
@@ -22,9 +23,14 @@ public class WormController : MonoBehaviour
     private Vector3 _weaponTilt = Vector3.zero;
     private float _slowMoveSpeed;
     private float _slowRotationSpeed;
+
     private float _fastMoveSpeed;
     private float _fastRotationSpeed;
+
+    private float _xSpeed;
     private float _ySpeed;
+    private float _zSpeed;
+
     private bool _didAction;
     private int _minimumYLevel = -20; 
 
@@ -74,6 +80,7 @@ public class WormController : MonoBehaviour
     public void FixedUpdate()
     {
         ApplyGravity();
+        ApplyFriction();
         ApplyBazookaTilt();
         Move();
     }
@@ -94,11 +101,22 @@ public class WormController : MonoBehaviour
         Destroy(gameObject);
     }
 
+
+
     private void ApplyGravity()
-    {
+    { 
         if (!_characterController.isGrounded)
         {
             _ySpeed -= _gravityAccelleration;
+        }
+    }
+
+    private void ApplyFriction()
+    {
+        if (_characterController.isGrounded)
+        {
+            _xSpeed = _xSpeed - _xSpeed * _frictionIntensity;
+            _zSpeed = _zSpeed - _zSpeed * _frictionIntensity;
         }
     }
 
@@ -110,7 +128,7 @@ public class WormController : MonoBehaviour
     private void Move()
     {
         transform.Rotate(0, inputVector.x * _rotationSpeed, 0);
-        Vector3 moveVector = transform.rotation * new Vector3(0, _ySpeed, inputVector.y * _moveSpeed);
+        Vector3 moveVector = transform.rotation * new Vector3(_xSpeed, _ySpeed, inputVector.y * _moveSpeed + _zSpeed);
         _characterController.Move(moveVector);
     }
 
@@ -161,7 +179,14 @@ public class WormController : MonoBehaviour
         stats.TakeDamage(damage);
         _faceSwapper.SetConcernedFace();
         _animations.PlayDamageAnimation();
+    }
 
+    public void ApplyKnockback(Vector3 direction, float intensity)
+    {
+        direction = transform.rotation * direction;
+        _xSpeed = direction.x * intensity;
+        _ySpeed = direction.y * intensity;
+        _zSpeed = direction.z * intensity;
     }
 
     private void Deactivate()
