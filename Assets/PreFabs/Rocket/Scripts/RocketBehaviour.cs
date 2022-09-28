@@ -62,7 +62,7 @@ public class RocketBehaviour : MonoBehaviour
         {
             if (collider.gameObject.tag == "Player")
             {
-                Impact impact = ImpactCalculator.GetImpact(transform.position, collider.transform.position, _blastRadius);
+                Impact impact = ImpactCalculator.GetImpact(transform.position, collider.ClosestPoint(transform.position), _blastRadius);
                 float damage = _baseDamage * impact.intensity;
                 collider.gameObject.GetComponent<WormController>().TakeDamage(((int)damage));
             }
