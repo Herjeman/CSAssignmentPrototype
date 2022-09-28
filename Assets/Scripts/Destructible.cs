@@ -9,8 +9,7 @@ public class Destructible : MonoBehaviour
 
     private void Awake()
     {
-        stats = new Stats();
-        stats.SetHp(_startingHp);
+        stats = new Stats(_startingHp);
     }
 
     public void TakeDamage(int damage)
