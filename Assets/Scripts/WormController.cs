@@ -157,6 +157,7 @@ public class WormController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log(gameObject.name + " took " + damage + " points of damage");
         stats.TakeDamage(damage);
         _faceSwapper.SetConcernedFace();
         _animations.PlayDamageAnimation();
