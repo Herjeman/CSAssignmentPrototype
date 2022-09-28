@@ -41,8 +41,7 @@ public class WormController : MonoBehaviour
         _animations = GetComponentInChildren<PlayerAnimations>();
         _bazooka = GetComponentInChildren<Bazooka>();
 
-        stats = new Stats();
-        stats.SetHp(_startingHp);
+        stats = new Stats(_startingHp);
 
         _slowMoveSpeed = _moveSpeed * 0f; // replace this with changing the bazooka, so it fires automatically at full charge
         _slowRotationSpeed = _rotationSpeed * 0.25f;

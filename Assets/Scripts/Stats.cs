@@ -7,7 +7,16 @@ public class Stats
     private int _hp;
     private int _maxHp;
     
-   
+   public Stats(int maxHp, int startingHp = 0)
+    {
+        _maxHp = maxHp;
+        _hp = startingHp;
+        if (_hp == 0)
+        {
+            _hp = _maxHp;
+        }
+    }
+
 
     public void TakeDamage(int damage)
     {
