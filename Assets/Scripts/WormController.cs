@@ -14,6 +14,7 @@ public class WormController : MonoBehaviour
     [SerializeField] private float _gravityAccelleration = 0.01f;
     [SerializeField] private float _weaponTiltSpeed;
     [SerializeField][Range(0f, 1f)] private float _frictionIntensity;
+    [SerializeField] private float _verticalKnockbackModifier;
 
     private Bazooka _bazooka;
     private FaceSwapper _faceSwapper;
@@ -186,7 +187,7 @@ public class WormController : MonoBehaviour
     {
         Debug.DrawRay(transform.position, direction * 10, Color.red, 5);
         _xSpeed = direction.x * intensity;
-        _ySpeed = -direction.y * intensity * 0.1f;
+        _ySpeed = direction.y * intensity * _verticalKnockbackModifier;
         _zSpeed = direction.z * intensity;
         Debug.Log($"Applied knockback:{_xSpeed},{_ySpeed}, {_zSpeed}");
     }

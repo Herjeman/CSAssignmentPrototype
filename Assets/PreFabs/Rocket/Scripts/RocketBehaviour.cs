@@ -9,6 +9,7 @@ public class RocketBehaviour : MonoBehaviour
     private float _blastRadius;
     private int _baseDamage;
 
+    [SerializeField] private Transform _noseTransform;
     [SerializeField] private GameObject _explosion;
 
     private GameObject _shootingPlayer;
@@ -62,7 +63,7 @@ public class RocketBehaviour : MonoBehaviour
         {
             if (collider.gameObject.tag == "Player")
             {
-                Impact impact = ImpactCalculator.GetImpact(transform.position, collider.transform.position, _blastRadius);
+                Impact impact = ImpactCalculator.GetImpact(_noseTransform.position, collider.transform.position, _blastRadius);
                 float damage = _baseDamage * impact.intensity;
 
                 WormController hitWorm = collider.gameObject.GetComponent<WormController>();
@@ -71,7 +72,7 @@ public class RocketBehaviour : MonoBehaviour
             }
             else if (collider.gameObject.tag == "Destructible")
             {
-                Impact impact = ImpactCalculator.GetImpact(transform.position, collider.ClosestPoint(transform.position), _blastRadius);
+                Impact impact = ImpactCalculator.GetImpact(_noseTransform.position, collider.ClosestPoint(transform.position), _blastRadius);
                 float damage = _baseDamage * impact.intensity;
                 collider.gameObject.GetComponent<Destructible>().TakeDamage(((int)damage));
             }
