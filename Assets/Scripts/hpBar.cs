@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class hpBar : MonoBehaviour
 {
     [SerializeField]  WormController wormController;
-    private Stats stats;
     private float filledAmount;
     [SerializeField] private Image redFillament;
   

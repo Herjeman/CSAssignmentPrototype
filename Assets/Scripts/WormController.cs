@@ -127,7 +127,9 @@ public class WormController : MonoBehaviour
     private void Move()
     {
         transform.Rotate(0, inputVector.x * _rotationSpeed, 0);
-        Vector3 moveVector = transform.rotation * new Vector3(_xSpeed, _ySpeed, inputVector.y * _moveSpeed + _zSpeed);
+        Vector3 moveVector = transform.rotation * new Vector3(0, _ySpeed, inputVector.y * _moveSpeed);
+        moveVector.x += _xSpeed;
+        moveVector.z += _zSpeed;
         _characterController.Move(moveVector);
     }
 
@@ -182,10 +184,11 @@ public class WormController : MonoBehaviour
 
     public void ApplyKnockback(Vector3 direction, float intensity)
     {
-        direction = transform.rotation * direction;
+        Debug.DrawRay(transform.position, direction * 10, Color.red, 5);
         _xSpeed = direction.x * intensity;
-        _ySpeed = direction.y * intensity;
+        _ySpeed = -direction.y * intensity * 0.1f;
         _zSpeed = direction.z * intensity;
+        Debug.Log($"Applied knockback:{_xSpeed},{_ySpeed}, {_zSpeed}");
     }
 
     private void Deactivate()

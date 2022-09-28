@@ -9,7 +9,6 @@ public static class ImpactCalculator
 
         Vector3 direction = GetDirection(origin, target);
 
-        Debug.Log($"Calculated impact with an intensity of {distance} in the {direction} direction");
         Impact impact = new Impact(distance, direction);
         return impact;
     }
@@ -21,13 +20,12 @@ public static class ImpactCalculator
 
     private static Vector3 GetDirection(Vector3 origin, Vector3 target)
     {
-        Vector3 direction = origin - target;
+        Vector3 direction = target - origin;
         return direction.normalized;
     }
 
     private static float NormalizeDistance(float distance, float maxDistance)
     {
-        Debug.Log($"Normalizing distance {distance} by max distance {maxDistance}");
         return 1 - distance / maxDistance; // doing cool math here could be appropriate
     }
 }
