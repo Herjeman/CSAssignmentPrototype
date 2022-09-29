@@ -30,13 +30,15 @@ public class Stats
 
     public float GetNormalizedHp()
     {
-        Debug.Log(_hp);
-        return _hp / _maxHp;
+        return _hp * 1.0f / _maxHp * 1.0f;
     }
     
     public void SetHp(int newHp)
     {
         _hp = newHp;
+        if (_hp > _maxHp)
+        {
+            _hp = _maxHp;
+        }
     }
-
 }

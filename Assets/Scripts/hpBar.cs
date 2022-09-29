@@ -5,21 +5,17 @@ using UnityEngine;
 using Unity.UI;
 using UnityEngine.UI;
 
-public class hpBar : MonoBehaviour
+public class HpBar : MonoBehaviour
 {
-    [SerializeField]  WormController wormController;
-    private float filledAmount;
-    [SerializeField] private Image redFillament;
-  
+    [SerializeField] private Image redFillament; 
       
-      private void Start()
-      {
-          redFillament.fillAmount = 1f;
-      }
+    private void Start()
+    {
+        redFillament.fillAmount = 1f;
+    }
 
-      void FixedUpdate()
-      {
-          filledAmount = wormController.stats.GetNormalizedHp();
-          redFillament.fillAmount = filledAmount;
-      }
+    public void UpdateHealthBar(float fillAmount)
+    {
+        redFillament.fillAmount = fillAmount;
+    }
 }
