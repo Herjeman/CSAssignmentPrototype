@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private GameObject _gameManager;
     [SerializeField] private GameObject _gameUiObject;
 
-    private GameObject _activeWorms;
+    private GameObject _activeWorm;
     private TurnsManager _turnsManager;
     private WormController _wormController;
     private GameUI _gameUi;
@@ -21,8 +21,8 @@ public class InputManager : MonoBehaviour
     private void Start()
     {        
         _turnsManager = _gameManager.GetComponent<TurnsManager>();
-        _activeWorms = _turnsManager.GetActiveWorm();
-        _wormController = _activeWorms.GetComponent<WormController>();
+        _activeWorm = _turnsManager.GetActiveWorm();
+        _wormController = _activeWorm.GetComponent<WormController>();
         _gameUi = _gameUiObject.GetComponent<GameUI>();
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
         TurnsManager.OnTurnEnd += DisableControl;
@@ -104,8 +104,8 @@ public class InputManager : MonoBehaviour
 
     private void UpdateActivePlayer()
     {
-        _activeWorms = _turnsManager.GetActiveWorm();
-        _wormController = _activeWorms.GetComponent<WormController>();
+        _activeWorm = _turnsManager.GetActiveWorm();
+        _wormController = _activeWorm.GetComponent<WormController>();
     }
 
     private void EnableControl()

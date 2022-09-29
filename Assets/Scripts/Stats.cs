@@ -30,6 +30,7 @@ public class Stats
 
     public float GetNormalizedHp()
     {
+        Debug.Log(_hp);
         return _hp / _maxHp;
     }
     
