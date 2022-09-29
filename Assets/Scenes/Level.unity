@@ -3819,66 +3819,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5582948
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Color.g
-      value: 0.85388213
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Color.r
-      value: 0.9622642
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Intensity
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_CookieSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Lightmapping
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Shadows.m_Bias
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_BounceIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Shadows.m_Strength
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Shadows.m_NormalBias
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548220, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_Shadows.m_Resolution
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548221, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548221, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 44.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 141548221, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.62
-      objectReference: {fileID: 0}
     - target: {fileID: 2151596755565178062, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -3926,10 +3866,6 @@ PrefabInstance:
     - target: {fileID: 2151596755565178063, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
       propertyPath: m_Name
       value: Enviroment
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151596755565178063, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
