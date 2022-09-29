@@ -20,6 +20,7 @@ public class WormController : MonoBehaviour
     private FaceSwapper _faceSwapper;
     private PlayerAnimations _animations;
     private Player _controllingPlayer;
+    private HpBar _hpBar;
 
     private Vector3 _weaponTilt = Vector3.zero;
     private float _slowMoveSpeed;
@@ -41,10 +42,11 @@ public class WormController : MonoBehaviour
         _faceSwapper = GetComponentInChildren<FaceSwapper>();
         _animations = GetComponentInChildren<PlayerAnimations>();
         _bazooka = GetComponentInChildren<Bazooka>();
+        _hpBar = GetComponentInChildren<HpBar>();
 
         stats = new Stats(_startingHp);
 
-        _slowMoveSpeed = _moveSpeed * 0f; // replace this with changing the bazooka, so it fires automatically at full charge
+        _slowMoveSpeed = _moveSpeed * 0f; // replace this with changing the bazooka, so it fires automatically at full charge. maybe?
         _slowRotationSpeed = _rotationSpeed * 0.25f;
         _fastMoveSpeed = _moveSpeed;
         _fastRotationSpeed = _rotationSpeed;
@@ -181,6 +183,7 @@ public class WormController : MonoBehaviour
         stats.TakeDamage(damage);
         _faceSwapper.SetConcernedFace();
         _animations.PlayDamageAnimation();
+        _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
     }
 
     public void ApplyKnockback(Vector3 direction, float intensity)
@@ -189,7 +192,16 @@ public class WormController : MonoBehaviour
         _xSpeed = direction.x * intensity;
         _ySpeed = direction.y * intensity * _verticalKnockbackModifier;
         _zSpeed = direction.z * intensity;
-        Debug.Log($"Applied knockback:{_xSpeed},{_ySpeed}, {_zSpeed}");
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag == "Pickup")
+        {
+            Destroy(hit.gameObject.transform.parent.gameObject);
+            stats.SetHp(stats.GetHp() + 25); //hardcoded variable!!! fix pls
+            _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
+        }
     }
 
     private void Deactivate()

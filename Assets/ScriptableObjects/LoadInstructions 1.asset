@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9f2d6ef9a5a6844a6cb908da276dfd, type: 3}
   m_Name: LoadInstructions 1
   m_EditorClassIdentifier: 
-  wormsPerPlayer: 0
-  playerNames: []
-  colors: []
+  wormsPerPlayer: 2
+  playerNames:
+  - 
+  - 
+  - 
+  - 
+  colors:
+  - {r: 0.080822945, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.19344974, b: 1, a: 1}
+  - {r: 1, g: 0.92473006, b: 0.042452812, a: 1}

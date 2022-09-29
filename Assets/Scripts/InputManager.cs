@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameManager;
-    [SerializeField] private GameObject _gameUiObject;
+    [SerializeField] private GameObject _gameManager; // fix this
+    [SerializeField] private GameObject _gameUiObject; // fix this
 
     private GameObject _activeWorm;
     private TurnsManager _turnsManager;
@@ -20,10 +20,10 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {        
-        _turnsManager = _gameManager.GetComponent<TurnsManager>();
+        _turnsManager = _gameManager.GetComponent<TurnsManager>(); // fix this
         _activeWorm = _turnsManager.GetActiveWorm();
         _wormController = _activeWorm.GetComponent<WormController>();
-        _gameUi = _gameUiObject.GetComponent<GameUI>();
+        _gameUi = _gameUiObject.GetComponent<GameUI>(); // fix this
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
         TurnsManager.OnTurnEnd += DisableControl;
         TurnsManager.OnTurnStart += EnableControl;
