@@ -228,6 +228,9 @@ public class WormController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+
+        // do landing juice please: https://docs.unity3d.com/ScriptReference/CharacterController.OnControllerColliderHit.html
+
         if (hit.gameObject.tag == "Pickup")
         {
             Destroy(hit.gameObject.transform.parent.gameObject);
