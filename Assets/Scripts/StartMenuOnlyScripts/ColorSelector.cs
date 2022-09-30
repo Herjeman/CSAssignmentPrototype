@@ -28,7 +28,6 @@ public class ColorSelector
         SkipUnavailableIndexes();
 
         ColorSelector.unavailableIndexes.Add(_selectionIndex);
-        Debug.Log($"NextColor Was called index is now at {_selectionIndex}, Color is {_colors[_selectionIndex]}, there are {unavailableIndexes.Count} unavailable indexes");
         return _colors[_selectionIndex];
     }
     public static void SetColorList(List<Color> colors)

@@ -9,7 +9,8 @@ public class WormController : MonoBehaviour
     CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
-    [SerializeField] private int _startingHp; 
+    [SerializeField] private int _startingHp;
+    [SerializeField] private int _minimumYLevel= 20;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravityAccelleration = 0.01f;
     [SerializeField] private float _weaponTiltSpeed;
@@ -34,7 +35,6 @@ public class WormController : MonoBehaviour
     private float _zSpeed;
 
     private bool _didAction;
-    private int _minimumYLevel = -20; 
 
     private void Start()
     {

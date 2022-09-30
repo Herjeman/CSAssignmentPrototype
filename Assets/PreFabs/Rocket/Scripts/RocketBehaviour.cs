@@ -8,6 +8,7 @@ public class RocketBehaviour : MonoBehaviour
     private Rigidbody _rb;
     private float _blastRadius;
     private int _baseDamage;
+    private int _fixedDamage;
 
     [SerializeField] private Transform _noseTransform;
     [SerializeField] private GameObject _explosion;
@@ -18,6 +19,7 @@ public class RocketBehaviour : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _fixedDamage = 5;
     }
 
 
@@ -73,7 +75,7 @@ public class RocketBehaviour : MonoBehaviour
             else if (collider.gameObject.tag == "Destructible")
             {
                 Impact impact = ImpactCalculator.GetImpact(_noseTransform.position, collider.ClosestPoint(transform.position), _blastRadius);
-                float damage = _baseDamage * impact.intensity;
+                float damage = _baseDamage * impact.intensity + _fixedDamage;
                 collider.gameObject.GetComponent<Destructible>().TakeDamage(((int)damage));
             }
         }
