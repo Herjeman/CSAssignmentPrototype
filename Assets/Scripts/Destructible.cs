@@ -5,6 +5,7 @@ using UnityEngine;
 public class Destructible : MonoBehaviour
 {
     [SerializeField] int _startingHp;
+    [SerializeField] GameObject DestructionParticleEffect;
     public Stats stats;
 
     private void Awake()
@@ -17,7 +18,18 @@ public class Destructible : MonoBehaviour
         stats.TakeDamage(damage);
         if (stats.GetHp() <= 0)
         {
+            ParticleEffect();
             Destroy(this.gameObject);
         }
     }
+
+    private void ParticleEffect()
+    {
+
+        Instantiate(DestructionParticleEffect, transform.position, Quaternion.identity); 
+
+    }
+
+
 }
+
