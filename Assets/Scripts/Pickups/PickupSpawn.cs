@@ -6,7 +6,6 @@ public class PickupSpawn : MonoBehaviour
 
     public void SpawnPickup(GameObject pickup)
     {
-        Debug.Log(_isNotSpawning);
         if (!_isNotSpawning)
         {
             GameObject newPickup = Instantiate(pickup, transform.position, Quaternion.identity);

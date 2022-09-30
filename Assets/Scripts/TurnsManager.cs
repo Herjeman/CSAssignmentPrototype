@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class TurnsManager : MonoBehaviour
 {
-    public int numberOfTurns;
-
-
-    public List<Player> players;
-    public List<GameObject> _activeWormsList;
 
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private GameSetUp _gameSetUp;
@@ -17,6 +12,7 @@ public class TurnsManager : MonoBehaviour
     [SerializeField] private float _turnTime = 10;
     [SerializeField] private float _retreatTime = 5;
 
+    private List<Player> _players;
     private static TurnsManager instance;
     private GameObject _activeWorm;
 
@@ -24,6 +20,7 @@ public class TurnsManager : MonoBehaviour
     private int _currentPlayerIndex;
     private float _timer;
     private bool _runTurnTimer;
+    private int numberOfTurns;
 
     private void Awake()
     {
@@ -48,16 +45,17 @@ public class TurnsManager : MonoBehaviour
 
     private void Start()
     {
-        players = _gameSetUp.CreatePlayers();
-        _spawner.SpawnWorms(players);
-        _currentPlayer = players[0];
+        _players = _gameSetUp.CreatePlayers();
+        _spawner.SpawnWorms(_players);
+        _currentPlayer = _players[0];
         _activeWorm = _currentPlayer.GetWorm();
         _currentPlayer.NextWorm();
         _timer = _turnTime;
-        _runTurnTimer = true;
+        _runTurnTimer = false;
+        OnTurnEnd();
     }
 
-    private void Update()
+    private void Update() // restructure this if block, it's a mess
     {
         if (_runTurnTimer)
         {
@@ -75,7 +73,7 @@ public class TurnsManager : MonoBehaviour
 
     public bool UpdateTurn()
     {
-        if (CheckForWin())
+        if (CheckForWin()) // put outside
         {
             return true;
         }
@@ -93,29 +91,29 @@ public class TurnsManager : MonoBehaviour
     private void NextPlayer()
     {
         _currentPlayerIndex++;
-        if (_currentPlayerIndex >= players.Count)
+        if (_currentPlayerIndex >= _players.Count)
         {
             _currentPlayerIndex = 0;
         }
-        _currentPlayer = players[_currentPlayerIndex];
+        _currentPlayer = _players[_currentPlayerIndex];
 
-        //Skip players with no worms left
+        //Skip players with no worms left, change this to updating the playerslist instead...
         while(_currentPlayer.worms.Count <= 0)
         {
             _currentPlayerIndex++;
-            if (_currentPlayerIndex >= players.Count)
+            if (_currentPlayerIndex >= _players.Count)
             {
                 _currentPlayerIndex = 0;
             }
-            _currentPlayer = players[_currentPlayerIndex];
+            _currentPlayer = _players[_currentPlayerIndex];
         }
     }
 
     private bool CheckForWin()
     {
         bool win = false;
-        int playersLeft = players.Count;
-        foreach (Player player in players)
+        int playersLeft = _players.Count;
+        foreach (Player player in _players) // simplify by updatinh players list every time a player runs out of worms
         {
             if (player.worms.Count <= 0)
             {
@@ -132,7 +130,7 @@ public class TurnsManager : MonoBehaviour
     private Player GetWinner()
     {
         Player winner = new Player("Default winner", 42, 0, Color.white);
-        foreach (Player player in players)
+        foreach (Player player in _players)
         {
             if (player.worms.Count > 0)
             {
@@ -177,6 +175,11 @@ public class TurnsManager : MonoBehaviour
     public int GetRemainingTurnTime()
     {
         return ((int)_timer);
+    }
+
+    public  Player GetCurrentPlayer()
+    {
+        return _currentPlayer;
     }
 
     public GameObject GetActiveWorm()

@@ -13,18 +13,21 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject _gameOverTextObject;
     [SerializeField] private GameObject _controlsExplanation;
     [SerializeField] private GameObject _showControlsPrompt;
+    [SerializeField] private TextMeshProUGUI _nextPlayerText;
 
 
     public bool gameIsRunning = true;
     public string gameOverMessage;
 
+    private TurnsManager _turnsManager;
     private TextMeshProUGUI _timerText;
     private TextMeshProUGUI _gameOverMessage;
 
     private void Awake()
     {
-        _timerText = _uiTimer.GetComponent<TextMeshProUGUI>();
+        _timerText = _uiTimer.GetComponent<TextMeshProUGUI>(); // serialize these
         _gameOverMessage = _gameOverTextObject.GetComponent<TextMeshProUGUI>();
+        _turnsManager = TurnsManager.GetInstance();
         TurnsManager.OnTurnEnd += ShowNextPlayerScreen;
         TurnsManager.OnTurnStart += HideNextPlayerScreen;
     }
@@ -44,11 +47,6 @@ public class GameUI : MonoBehaviour
 
     }
 
-    public void ShowControlsExplanation()
-    {
-        _controlsExplanation.SetActive(true);
-    }
-
     private void HideNextPlayerScreen()
     {
         _nextPlayerScreen.SetActive(false);
@@ -58,6 +56,7 @@ public class GameUI : MonoBehaviour
     {
         if (gameIsRunning)
         {
+            _nextPlayerText.text = _turnsManager.GetCurrentPlayer().playerName;
             _nextPlayerScreen.SetActive(true);   
         } 
     }

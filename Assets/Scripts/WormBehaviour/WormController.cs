@@ -16,6 +16,7 @@ public class WormController : MonoBehaviour
     [SerializeField] private float _weaponTiltSpeed;
     [SerializeField][Range(0f, 1f)] private float _frictionIntensity;
     [SerializeField] private float _verticalKnockbackModifier;
+    [SerializeField] private int _healthPackRestoreAmount;
 
     private Bazooka _bazooka;
     private FaceSwapper _faceSwapper;
@@ -46,7 +47,7 @@ public class WormController : MonoBehaviour
 
         stats = new Stats(_startingHp);
 
-        _slowMoveSpeed = _moveSpeed * 0f; // replace this with changing the bazooka, so it fires automatically at full charge. maybe?
+        _slowMoveSpeed = _moveSpeed * 0f;
         _slowRotationSpeed = _rotationSpeed * 0.25f;
         _fastMoveSpeed = _moveSpeed;
         _fastRotationSpeed = _rotationSpeed;
@@ -199,7 +200,7 @@ public class WormController : MonoBehaviour
         if (hit.gameObject.tag == "Pickup")
         {
             Destroy(hit.gameObject.transform.parent.gameObject);
-            stats.SetHp(stats.GetHp() + 25); //hardcoded variable!!! fix pls
+            stats.SetHp(stats.GetHp() + _healthPackRestoreAmount);
             _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
         }
     }

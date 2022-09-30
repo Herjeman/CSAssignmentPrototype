@@ -1540,12 +1540,13 @@ MonoBehaviour:
   _moveSpeed: 0.15
   _rotationSpeed: 2
   _startingHp: 100
-  _minimumYLevel: 0
+  _minimumYLevel: 5
   _jumpHeight: 0.2
   _gravityAccelleration: 0.01
   _weaponTiltSpeed: 1.5
   _frictionIntensity: 0.21
   _verticalKnockbackModifier: 0.52
+  _healthPackRestoreAmount: 25
 --- !u!1 &8341737798809215886
 GameObject:
   m_ObjectHideFlags: 0

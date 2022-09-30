@@ -8,6 +8,7 @@ public class ExplosionBehaviour : MonoBehaviour
     private float _timer;
     private float _lifetime = 0.7f;
     private float _lightLifetime = 0.1f;
+    private bool _hasLight;
 
     private Light _pointLight;
 
@@ -15,12 +16,16 @@ public class ExplosionBehaviour : MonoBehaviour
     {
         _timer = 0.0f;
         _pointLight = GetComponentInChildren<Light>();
+        if (_pointLight != null)
+        {
+            _hasLight = true;
+        }
     }
 
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer > _lightLifetime)
+        if (_timer > _lightLifetime && _hasLight)
         {
             _pointLight.intensity = 0;
         }

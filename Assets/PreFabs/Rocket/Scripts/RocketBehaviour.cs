@@ -30,8 +30,6 @@ public class RocketBehaviour : MonoBehaviour
 
         Vector3 newDirection = Vector3.RotateTowards(transform.position, _rotation, 10F, 10F);
         transform.rotation = Quaternion.LookRotation(newDirection);
-
-        //Debug.Log($"Rocket forward direction is: {transform.forward}");
     }
 
     private void OnCollisionEnter(Collision collision)

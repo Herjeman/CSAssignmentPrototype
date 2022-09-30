@@ -6,24 +6,20 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameManager; // fix this
-    [SerializeField] private GameObject _gameUiObject; // fix this
+    [SerializeField] private TurnsManager _turnsManager;
+    [SerializeField] private GameUI _gameUi;
 
     private GameObject _activeWorm;
-    private TurnsManager _turnsManager;
     private WormController _wormController;
-    private GameUI _gameUi;
     private Vector2 _moveValue;
-    private bool _allowWormControl = true;
+    private bool _allowWormControl;
     private float _nextPlayerScreenGraceTime = 1;
     private float _graceTimer;
 
     private void Start()
     {        
-        _turnsManager = _gameManager.GetComponent<TurnsManager>(); // fix this
         _activeWorm = _turnsManager.GetActiveWorm();
         _wormController = _activeWorm.GetComponent<WormController>();
-        _gameUi = _gameUiObject.GetComponent<GameUI>(); // fix this
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
         TurnsManager.OnTurnEnd += DisableControl;
         TurnsManager.OnTurnStart += EnableControl;
