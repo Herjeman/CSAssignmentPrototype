@@ -47,10 +47,9 @@ public class RocketBehaviour : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void Init(GameObject player, GameObject turnsManager, float blastRadius, int baseDamage)
+    public void Init(GameObject player, float blastRadius, int baseDamage)
     {
         _shootingPlayer = player;
-        _turnsManager = turnsManager;
         _blastRadius = blastRadius;
         _baseDamage = baseDamage;
         TurnsManager.OnTurnEnd += RemoveThis;

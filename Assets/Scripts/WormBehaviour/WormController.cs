@@ -153,7 +153,7 @@ public class WormController : MonoBehaviour
     {
         if (!_didAction)
         {
-            _bazooka.LaunchRocket();
+            _bazooka.Shoot();
             _faceSwapper.SetNeutralFace();
             _rotationSpeed = _fastRotationSpeed;
             _moveSpeed = _fastMoveSpeed;

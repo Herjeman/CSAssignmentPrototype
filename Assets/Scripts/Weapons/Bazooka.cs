@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
 
-public class Bazooka  : MonoBehaviour
+public class Bazooka  : BaseWeapon
 {
     [SerializeField] private GameObject _rocket;
     [SerializeField] private GameObject _chargeIndicator;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private GameObject _turnsManager;
     [SerializeField] private float _charge;
     [SerializeField] private float _force;
     [SerializeField] private float _blastRadius;
@@ -26,11 +25,21 @@ public class Bazooka  : MonoBehaviour
         }
     }
 
-    public GameObject LaunchRocket()
+    public override void Equip()
+    {
+        Debug.Log("Equips");
+    }
+
+    public override void UnEquip()
+    {
+        Debug.Log("Unequips"); 
+    }
+
+    public override GameObject Shoot()
     {
         GameObject launchedRocket = Instantiate(_rocket, _spawnPoint.position, transform.rotation);
         launchedRocket.GetComponent<Rigidbody>().AddForce(transform.forward * _force, ForceMode.Impulse);
-        launchedRocket.GetComponent<RocketBehaviour>().Init(transform.parent.gameObject, _turnsManager, _blastRadius, _blastBaseDamage);
+        launchedRocket.GetComponent<RocketBehaviour>().Init(transform.parent.gameObject, _blastRadius, _blastBaseDamage);
         _charging = false;
         _chargeIndicator.SetActive(false);
         return launchedRocket;

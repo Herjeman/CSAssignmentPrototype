@@ -18,17 +18,17 @@ public class Destructible : MonoBehaviour
         stats.TakeDamage(damage);
         if (stats.GetHp() <= 0)
         {
-            ParticleEffect();
+            //ParticleEffect();
             Destroy(this.gameObject);
         }
     }
 
-    private void ParticleEffect()
-    {
+    //private void ParticleEffect()
+    //{
 
-        Instantiate(DestructionParticleEffect, transform.position, Quaternion.identity); 
+    //    Instantiate(DestructionParticleEffect, transform.position, Quaternion.identity); 
 
-    }
+    //}
 
 
 }
