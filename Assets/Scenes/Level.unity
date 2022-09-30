@@ -4075,6 +4075,10 @@ PrefabInstance:
       propertyPath: _startingHp
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2591563024537940245, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
+      propertyPath: DestructionParticleEffect
+      value: 
+      objectReference: {fileID: 4042946370226024853, guid: fa8d61bba4cd7cf439275fe65cb424dc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
 --- !u!1 &1608924422
