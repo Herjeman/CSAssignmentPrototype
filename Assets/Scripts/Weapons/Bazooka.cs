@@ -25,16 +25,6 @@ public class Bazooka  : BaseWeapon
         }
     }
 
-    public override void Equip()
-    {
-        Debug.Log("Equips");
-    }
-
-    public override void UnEquip()
-    {
-        Debug.Log("Unequips"); 
-    }
-
     public override GameObject Shoot()
     {
         GameObject launchedRocket = Instantiate(_rocket, _spawnPoint.position, transform.rotation);
@@ -45,7 +35,7 @@ public class Bazooka  : BaseWeapon
         return launchedRocket;
     }
 
-    public void StartCharge()
+    public override void StartCharge()
     {
         _force = 0;
         _charging = true;

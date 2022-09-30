@@ -61,11 +61,11 @@ public class InputManager : MonoBehaviour
         {
             if (context.started)
             {
-                _wormController.StartCharge();
+                _wormController.Shoot();
             }
             else if (context.canceled)
             {
-                _wormController.Shoot();
+                _wormController.LaunchRocket();
             }
         }
     }
@@ -75,6 +75,14 @@ public class InputManager : MonoBehaviour
         if (_allowWormControl)
         {
             _wormController.TiltWeapon(context.ReadValue<float>());
+        }
+    }
+
+    public void NextWeapon(InputAction.CallbackContext context)
+    {
+        if (_allowWormControl && context.performed)
+        {
+            _wormController.NextWeapon();
         }
     }
 

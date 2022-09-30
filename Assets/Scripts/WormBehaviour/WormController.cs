@@ -19,10 +19,14 @@ public class WormController : MonoBehaviour
     [SerializeField] private int _healthPackRestoreAmount;
 
     private Bazooka _bazooka;
+    private OtherWeapon _otherWeapon;
+    private int _equippedWeaponIndex;
+
     private FaceSwapper _faceSwapper;
     private PlayerAnimations _animations;
     private Player _controllingPlayer;
     private HpBar _hpBar;
+    private Inventory _inventory;
 
     private Vector3 _weaponTilt = Vector3.zero;
     private float _slowMoveSpeed;
@@ -36,6 +40,7 @@ public class WormController : MonoBehaviour
     private float _zSpeed;
 
     private bool _didAction;
+    private bool _hasAmmo = true;
 
     private void Start()
     {
@@ -43,8 +48,10 @@ public class WormController : MonoBehaviour
         _faceSwapper = GetComponentInChildren<FaceSwapper>();
         _animations = GetComponentInChildren<PlayerAnimations>();
         _bazooka = GetComponentInChildren<Bazooka>();
+        _otherWeapon = GetComponentInChildren<OtherWeapon>();
         _hpBar = GetComponentInChildren<HpBar>();
 
+        _inventory = new Inventory(_bazooka.gameObject, _otherWeapon.gameObject);
         stats = new Stats(_startingHp);
 
         _slowMoveSpeed = _moveSpeed * 0f;
@@ -84,7 +91,7 @@ public class WormController : MonoBehaviour
     {
         ApplyGravity();
         ApplyFriction();
-        ApplyBazookaTilt();
+        ApplyWeaponTilt();
         Move();
     }
 
@@ -123,10 +130,6 @@ public class WormController : MonoBehaviour
         }
     }
 
-    private void ApplyBazookaTilt()
-    {
-        _bazooka.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
-    }
 
     private void Move()
     {
@@ -136,30 +139,54 @@ public class WormController : MonoBehaviour
         moveVector.z += _zSpeed;
         _characterController.Move(moveVector);
     }
-
-    public void StartCharge()
+    private void ApplyWeaponTilt()
     {
-        if (!_didAction)
-        {
-            _bazooka.StartCharge();
-            _faceSwapper.SetAngryFace();
-            _rotationSpeed = _slowRotationSpeed;
-            _moveSpeed = _slowMoveSpeed;
-            TurnsManager.GetInstance().StopTurnTimer();
-        }
+        _bazooka.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
+        _otherWeapon.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
     }
 
     public void Shoot()
     {
-        if (!_didAction)
+        if (!_didAction && _equippedWeaponIndex == 0)
+        {
+            _bazooka.StartCharge();
+            EnterChargeState();
+        }
+        else if (!_didAction && _equippedWeaponIndex == 1)
+        {
+            _otherWeapon.StartCharge();
+            EnterChargeState();
+        }
+    }
+
+    public void LaunchRocket()
+    {
+        if (!_didAction && _equippedWeaponIndex == 0)
         {
             _bazooka.Shoot();
-            _faceSwapper.SetNeutralFace();
-            _rotationSpeed = _fastRotationSpeed;
-            _moveSpeed = _fastMoveSpeed;
-            _didAction = true;
-            TurnsManager.GetInstance().StartTurnTimer(_didAction);
+            ExitChargeState();
         }
+        else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
+        {
+            _otherWeapon.Shoot();
+            ExitChargeState();
+        }
+    }
+    private void EnterChargeState()
+    {
+        _faceSwapper.SetAngryFace();
+        _rotationSpeed = _slowRotationSpeed;
+        _moveSpeed = _slowMoveSpeed;
+        TurnsManager.GetInstance().StopTurnTimer();
+    }
+
+    private void ExitChargeState()
+    {
+        _faceSwapper.SetNeutralFace();
+        _rotationSpeed = _fastRotationSpeed;
+        _moveSpeed = _fastMoveSpeed;
+        _didAction = true;
+        TurnsManager.GetInstance().StartTurnTimer(_didAction);
     }
 
     public void Jump()
@@ -169,13 +196,17 @@ public class WormController : MonoBehaviour
             _ySpeed = _jumpHeight;
             PlayerSounds.GetInstance().PlayJumpSound();
             _animations.PlayJumpAnimation();
-            _faceSwapper.SetNeutralFace();
         }
     }
 
     public void TiltWeapon(float direction)
     {
         _weaponTilt.x = -direction;
+    }
+
+    public void NextWeapon()
+    {
+        _equippedWeaponIndex = _inventory.EquipNextWeapon();
     }
 
     public void TakeDamage(int damage)

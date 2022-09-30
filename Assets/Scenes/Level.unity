@@ -1483,6 +1483,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 82de8e12-9be4-41f4-9352-bacab864c982
     m_ActionName: Player/ToggleControlsExplanation[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510970673}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: NextWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9196d0a3-0df5-4b76-84ad-74f947235ff1
+    m_ActionName: Player/NextWeapon[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
