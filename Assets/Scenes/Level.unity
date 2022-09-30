@@ -3869,6 +3869,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1382046241645941383, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
+      propertyPath: _startingHp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109402062222770113, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
+      propertyPath: _startingHp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151596753908653063, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
+      propertyPath: m_TagString
+      value: Destructible
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151596753921087039, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
+      propertyPath: m_TagString
+      value: Destructible
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151596755038262116, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
+      propertyPath: m_TagString
+      value: Destructible
+      objectReference: {fileID: 0}
     - target: {fileID: 2151596755565178062, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -3916,6 +3936,10 @@ PrefabInstance:
     - target: {fileID: 2151596755565178063, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
       propertyPath: m_Name
       value: Enviroment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172670990337090689, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
+      propertyPath: _startingHp
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6137694bf874cc34b8b3e2fc73e02c4f, type: 3}
