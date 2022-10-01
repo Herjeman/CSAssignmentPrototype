@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2699181173809814813}
   - component: {fileID: 4500668923149335751}
   - component: {fileID: 9075058825683944449}
-  - component: {fileID: 902971352355851708}
   m_Layer: 0
   m_Name: PP_Rock_Moss_Grown_11
   m_TagString: Destructible
@@ -113,16 +112,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingHp: 100
---- !u!114 &902971352355851708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4500668923149335752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c429bed3ae778b47adb832c94be0daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingHp: 0
+  DestructionParticleEffect: {fileID: 4042946370226024853, guid: fa8d61bba4cd7cf439275fe65cb424dc, type: 3}

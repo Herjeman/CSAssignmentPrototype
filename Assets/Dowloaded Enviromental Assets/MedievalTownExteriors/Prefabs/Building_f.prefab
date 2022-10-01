@@ -111,3 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingHp: 75
+  DestructionParticleEffect: {fileID: 4042946370226024853, guid: fa8d61bba4cd7cf439275fe65cb424dc, type: 3}
