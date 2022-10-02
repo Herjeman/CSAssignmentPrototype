@@ -7,15 +7,15 @@ using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour
 {
-    [SerializeField] private Image redFillament; 
+    [SerializeField] private Image _redFillament; 
       
     private void Start()
     {
-        redFillament.fillAmount = 1f;
+        _redFillament.fillAmount = 1f;
     }
 
     public void UpdateHealthBar(float fillAmount)
     {
-        redFillament.fillAmount = fillAmount;
+        _redFillament.fillAmount = fillAmount;
     }
 }

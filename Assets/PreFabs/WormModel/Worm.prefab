@@ -2144,7 +2144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5888c02c0ad17bc46b240dc4a09ed8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redFillament: {fileID: 1448146193504502028}
+  _redFillament: {fileID: 1448146193504502028}
 --- !u!114 &1448146193504502028 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4694057418157838877, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
