@@ -16,7 +16,7 @@ public class WeaponSounds : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision Other)
+    private void OnCollisionEnter(Collision collider)
     {
 
         PlayExplosion();
