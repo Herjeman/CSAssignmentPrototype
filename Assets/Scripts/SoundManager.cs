@@ -23,6 +23,8 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField] private AudioClip _shotgunShot;
     [SerializeField] private float _shotgunShotVolume = 1;
+    [SerializeField] private AudioClip _shotgunReload;
+    [SerializeField] private float _shotgunReloadVolume = 1;
 
     private void Awake()
     {
@@ -64,5 +66,10 @@ public class SoundManager : MonoBehaviour
     public void PlayshotgunShotSound()
     {
         _audioSource.PlayOneShot(_shotgunShot, _shotgunShotVolume);
+    }
+    
+    public void PlayshotgunReloadSound()
+    {
+        _audioSource.PlayOneShot(_shotgunReload, _shotgunReloadVolume);
     }
 }
