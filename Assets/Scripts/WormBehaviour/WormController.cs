@@ -77,7 +77,7 @@ public class WormController : MonoBehaviour
         {
             InitializeDying();
         }
-        else if(hp < 3)
+        else if(hp < 30)
         {
             _faceSwapper.SetConcernedFace();
         }
