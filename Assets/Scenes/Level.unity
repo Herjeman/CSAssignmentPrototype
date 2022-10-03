@@ -2114,7 +2114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 745388025}
   _jumpSound: {fileID: 8300000, guid: 9ff0b414ad986d649bff2c418f69d2fe, type: 3}
-  _landingSound: {fileID: 0}
+  _landingSound: {fileID: 8300000, guid: e2cfd89f9f8a0ea48a9ab6beb5a39016, type: 3}
+  _launchRocket: {fileID: 8300000, guid: 190598a074ec98b4c9d2afb0f9b23ae0, type: 3}
+  _explosion: {fileID: 8300000, guid: 6394506097dd88e47a8d9727bc56cb14, type: 3}
 --- !u!82 &745388025
 AudioSource:
   m_ObjectHideFlags: 0

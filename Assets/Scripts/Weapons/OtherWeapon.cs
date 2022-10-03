@@ -7,11 +7,13 @@ public class OtherWeapon : BaseWeapon
     public override GameObject Shoot()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
 
-        if (hit.transform.tag == "Player")
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
-            hit.transform.gameObject.GetComponent<WormController>().TakeDamage(75);
+            if (hit.transform.tag == "Player")
+            {
+                hit.transform.gameObject.GetComponent<WormController>().TakeDamage(75);
+            }
         }
         return new GameObject();
     }

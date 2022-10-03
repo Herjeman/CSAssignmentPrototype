@@ -15,11 +15,14 @@ public class RocketBehaviour : MonoBehaviour
 
     private GameObject _shootingPlayer;
     private GameObject _turnsManager;
+    private SoundManager _soundManager;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _fixedDamage = 5;
+        _soundManager = SoundManager.GetInstance();
+        _soundManager.PlayLaunchSound();
     }
 
 
@@ -43,6 +46,7 @@ public class RocketBehaviour : MonoBehaviour
         }
 
         SpawnExplosionEffect();
+        _soundManager.PlayExplosionSound();
         CheckForHits();
         Destroy(this.gameObject);
     }
