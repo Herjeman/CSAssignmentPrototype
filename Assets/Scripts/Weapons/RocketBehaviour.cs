@@ -14,7 +14,6 @@ public class RocketBehaviour : MonoBehaviour
     [SerializeField] private GameObject _explosion;
 
     private GameObject _shootingPlayer;
-    private GameObject _turnsManager;
     private SoundManager _soundManager;
 
     private void Awake()
