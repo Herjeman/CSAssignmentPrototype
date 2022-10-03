@@ -2037,8 +2037,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 8341737797281434434}
     m_Modifications:
     - target: {fileID: 4694057418157838877, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694057418157838877, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694057418523667906, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
+      propertyPath: m_Color.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694057418523667906, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694057418523667906, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694057418523667906, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4694057420011869889, guid: 4927c4dfee1865942a586d29b07af56c, type: 3}
       propertyPath: m_PresetInfoIsWorld
