@@ -6,6 +6,7 @@ public class OtherWeapon : BaseWeapon
 {
     public override GameObject Shoot()
     {
+        SoundManager.GetInstance().PlayshotgunShotSound();
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
