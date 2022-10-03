@@ -685,7 +685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &130448159
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2114,9 +2114,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 745388025}
   _jumpSound: {fileID: 8300000, guid: 9ff0b414ad986d649bff2c418f69d2fe, type: 3}
+  _jumpSoundVolume: 1
   _landingSound: {fileID: 8300000, guid: e2cfd89f9f8a0ea48a9ab6beb5a39016, type: 3}
+  _landingSoundVolume: 1
   _launchRocket: {fileID: 8300000, guid: 190598a074ec98b4c9d2afb0f9b23ae0, type: 3}
+  _launchRocketVolume: 1
   _explosion: {fileID: 8300000, guid: 6394506097dd88e47a8d9727bc56cb14, type: 3}
+  _explosionVolume: 1
 --- !u!82 &745388025
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3590,7 +3594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103ac6c284d64254f933081834ec55a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPack: {fileID: 6434880630570310039, guid: 87becd364cef0d7419819697ba5b013d, type: 3}
+  _pickups:
+  - {fileID: 6434880630570310039, guid: 87becd364cef0d7419819697ba5b013d, type: 3}
+  - {fileID: 4448242206321774847, guid: fa8db7304f9152244a52bea6693bcacd, type: 3}
   _spawnPoints:
   - {fileID: 615522276}
   - {fileID: 1541788329}

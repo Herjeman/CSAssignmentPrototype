@@ -4,7 +4,7 @@ using UnityEngine;
 public class PickupManager : MonoBehaviour
 {
     private static PickupManager instance;
-    [SerializeField] private GameObject _healthPack;
+    [SerializeField] private List<GameObject> _pickups;
     [SerializeField] private List<PickupSpawn> _spawnPoints;
     [SerializeField] private TurnsManager _turnsManager;
 
@@ -22,7 +22,7 @@ public class PickupManager : MonoBehaviour
 
     private void Start()
     {
-        TurnsManager.OnTurnStart += SpawnHealthPack;
+        TurnsManager.OnTurnStart += SpawnRandomPickup;
     }
 
     public static PickupManager GetInstance()
@@ -30,14 +30,14 @@ public class PickupManager : MonoBehaviour
         return instance;
     }
 
-    private void SpawnHealthPack()
+    private void SpawnRandomPickup()
     {
         PickupSpawn spawnpoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-        spawnpoint.SpawnPickup(_healthPack);
+        spawnpoint.SpawnPickup(_pickups[Random.Range(0, _pickups.Count)]);
     }
 
     private void OnDestroy()
     {
-        TurnsManager.OnTurnStart -= SpawnHealthPack;
+        TurnsManager.OnTurnStart -= SpawnRandomPickup;
     }
 }

@@ -8,10 +8,18 @@ public class SoundManager : MonoBehaviour
 
 
     [SerializeField] private AudioSource _audioSource;
+
     [SerializeField] private AudioClip _jumpSound;
+    [SerializeField] private float _jumpSoundVolume = 1;
+
     [SerializeField] private AudioClip _landingSound;
+    [SerializeField] private float _landingSoundVolume = 1;
+
     [SerializeField] private AudioClip _launchRocket;
+    [SerializeField] private float _launchRocketVolume = 1;
+
     [SerializeField] private AudioClip _explosion;
+    [SerializeField] private float _explosionVolume = 1;
 
     private void Awake()
     {
@@ -32,22 +40,21 @@ public class SoundManager : MonoBehaviour
 
     public void PlayJumpSound()
     {
-        Debug.Log("PlayJumpSound");
-        _audioSource.PlayOneShot(_jumpSound);
+        _audioSource.PlayOneShot(_jumpSound, _jumpSoundVolume);
     }
 
     public void PlayLandingSound()
     {
-        _audioSource.PlayOneShot(_landingSound);
+        _audioSource.PlayOneShot(_landingSound, _landingSoundVolume);
     }
 
     public void PlayLaunchSound()
     {
-        _audioSource.PlayOneShot(_launchRocket);
+        _audioSource.PlayOneShot(_launchRocket, _launchRocketVolume);
     }
 
     public void PlayExplosionSound()
     {
-        _audioSource.PlayOneShot(_explosion);
+        _audioSource.PlayOneShot(_explosion, _explosionVolume);
     }
 }

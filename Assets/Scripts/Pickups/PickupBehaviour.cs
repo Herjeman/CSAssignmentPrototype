@@ -15,5 +15,4 @@ public class PickupBehaviour : MonoBehaviour
     {
         _mySpawn.EnableSpawning();
     }
-
 }

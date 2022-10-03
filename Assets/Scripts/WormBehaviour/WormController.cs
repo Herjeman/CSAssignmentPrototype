@@ -231,7 +231,13 @@ public class WormController : MonoBehaviour
 
         // do landing juice please: https://docs.unity3d.com/ScriptReference/CharacterController.OnControllerColliderHit.html
 
-        if (hit.gameObject.tag == "Pickup")
+        if (hit.gameObject.tag == "Pickup") // do early return?
+        {
+            Destroy(hit.gameObject.transform.parent.gameObject);
+            stats.SetHp(stats.GetHp() + _healthPackRestoreAmount);
+            _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
+        }
+        else if (hit.gameObject.tag == "Pickup") // do ammo pickup
         {
             Destroy(hit.gameObject.transform.parent.gameObject);
             stats.SetHp(stats.GetHp() + _healthPackRestoreAmount);

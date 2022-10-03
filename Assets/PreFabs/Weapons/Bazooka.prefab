@@ -81,7 +81,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 4001367316126392479}
   _charge: 10
   _force: 15
-  _blastRadius: 4
+  _blastRadius: 10
   _blastBaseDamage: 50
 --- !u!1 &7570252479019065952
 GameObject:
