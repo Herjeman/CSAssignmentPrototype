@@ -10,7 +10,7 @@ public class OtherWeapon : BaseWeapon
         
         //SpawnMuzzleFlashEffect();
         RaycastHit hit;
-        SoundManager.GetInstance().PlayshotgunShotSound();
+        SoundManager.GetInstance().PlayShotgunShotSound();
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
@@ -25,7 +25,7 @@ public class OtherWeapon : BaseWeapon
 
     public override void StartCharge()
     {
-        Debug.Log("Shotgun goes, clink-clonk");
+        SoundManager.GetInstance().PlayShotgunReloadSound();
     }
     
     // private void SpawnMuzzleFlashEffect()
