@@ -2198,8 +2198,10 @@ MonoBehaviour:
   _launchRocketVolume: 1
   _explosion: {fileID: 8300000, guid: 6394506097dd88e47a8d9727bc56cb14, type: 3}
   _explosionVolume: 1
-  _shotgunShot: {fileID: 8300000, guid: 3e627206013d8f449a5b21dde1f5da57, type: 3}
+  _shotgunShot: {fileID: 8300000, guid: db6f8b4b4c71f014dad64de5dcb5d298, type: 3}
   _shotgunShotVolume: 1
+  _shotgunReload: {fileID: 8300000, guid: 3e627206013d8f449a5b21dde1f5da57, type: 3}
+  _shotgunReloadVolume: 1
 --- !u!82 &745388025
 AudioSource:
   m_ObjectHideFlags: 0

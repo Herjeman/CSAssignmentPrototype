@@ -169,6 +169,7 @@ public class WormController : MonoBehaviour
         else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
         {
             _otherWeapon.Shoot();
+            SoundManager.GetInstance().PlayshotgunReloadSound();
             ExitChargeState();
         }
     }
