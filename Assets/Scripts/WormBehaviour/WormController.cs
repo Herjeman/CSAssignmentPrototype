@@ -194,7 +194,7 @@ public class WormController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _ySpeed = _jumpHeight;
-            PlayerSounds.GetInstance().PlayJumpSound();
+            SoundManager.GetInstance().PlayJumpSound();
             _animations.PlayJumpAnimation();
         }
     }

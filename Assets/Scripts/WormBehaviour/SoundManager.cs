@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSounds : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
-    private static PlayerSounds instance;
+    private static SoundManager instance;
 
 
     [SerializeField] private AudioSource _audioSource;
@@ -23,7 +23,7 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
-    public static PlayerSounds GetInstance()
+    public static SoundManager GetInstance()
     {
         return instance;
     }
