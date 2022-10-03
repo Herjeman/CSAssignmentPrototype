@@ -2570,7 +2570,7 @@ MonoBehaviour:
   _gameManager: {fileID: 46514054}
   _turnSpeed: 1
   _zoomSpeed: 0.5
-  _offset: {x: 2, y: 0, z: 0}
+  _offset: {x: -4, y: 2.5, z: -4}
   _cameraMaxDistance: 20
   _cameraMinDistance: 1
 --- !u!1 &986144904
