@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _muzzleFlash: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
+  _attackPoint: {fileID: 0}
+  _screenShakeIntensity: 0.15
+  _screenShakeDuration: 0.24
 --- !u!1001 &1284837035888888045
 PrefabInstance:
   m_ObjectHideFlags: 0

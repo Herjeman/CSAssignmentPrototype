@@ -6,7 +6,11 @@ public class Shotgun : BaseWeapon
 {
     [SerializeField] private GameObject _muzzleFlash;
     [SerializeField] private Transform _attackPoint;
+    [SerializeField] private float _screenShakeIntensity;
+    [SerializeField] private float _screenShakeDuration;
+
     private bool _isCreated;
+
     public override GameObject Shoot()
     {
         _isCreated = false;
@@ -16,12 +20,13 @@ public class Shotgun : BaseWeapon
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
-            
             if (hit.transform.tag == "Player")
             {
                 hit.transform.gameObject.GetComponent<WormController>().TakeDamage(75);
             }
         }
+
+        CameraOrbit.GetInstance().ApplyScreenShake(_screenShakeIntensity, _screenShakeDuration);
         return new GameObject();
         
     }
@@ -31,7 +36,7 @@ public class Shotgun : BaseWeapon
         SoundManager.GetInstance().PlayShotgunReloadSound();
     }
     
-    public void SpawnMuzzleFlashEffect()
+    private void SpawnMuzzleFlashEffect()
     {
         if (!_isCreated)
         {
