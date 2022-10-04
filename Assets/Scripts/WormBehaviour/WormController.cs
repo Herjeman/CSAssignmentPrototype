@@ -19,7 +19,7 @@ public class WormController : MonoBehaviour
     [SerializeField] private int _healthPackRestoreAmount;
 
     private Bazooka _bazooka;
-    private OtherWeapon _otherWeapon;
+    private Shotgun _shotgun;
     private int _equippedWeaponIndex;
 
     private FaceSwapper _faceSwapper;
@@ -48,10 +48,10 @@ public class WormController : MonoBehaviour
         _faceSwapper = GetComponentInChildren<FaceSwapper>();
         _animations = GetComponentInChildren<PlayerAnimations>();
         _bazooka = GetComponentInChildren<Bazooka>();
-        _otherWeapon = GetComponentInChildren<OtherWeapon>();
+        _shotgun = GetComponentInChildren<Shotgun>();
         _hpBar = GetComponentInChildren<HpBar>();
 
-        _inventory = new Inventory(_bazooka.gameObject, _otherWeapon.gameObject);
+        _inventory = new Inventory(_bazooka.gameObject, _shotgun.gameObject);
         stats = new Stats(_startingHp);
 
         _slowMoveSpeed = _moveSpeed * 0f;
@@ -142,7 +142,7 @@ public class WormController : MonoBehaviour
     private void ApplyWeaponTilt()
     {
         _bazooka.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
-        _otherWeapon.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
+        _shotgun.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
     }
 
     public void Shoot()
@@ -154,7 +154,7 @@ public class WormController : MonoBehaviour
         }
         else if (!_didAction && _equippedWeaponIndex == 1)
         {
-            _otherWeapon.StartCharge();
+            _shotgun.StartCharge();
             EnterChargeState();
         }
     }
@@ -168,7 +168,7 @@ public class WormController : MonoBehaviour
         }
         else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
         {
-            _otherWeapon.Shoot();
+            _shotgun.Shoot();
             ExitChargeState();
         }
     }

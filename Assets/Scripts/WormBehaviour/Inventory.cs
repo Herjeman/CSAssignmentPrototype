@@ -8,13 +8,13 @@ public class Inventory
     private GameObject[] _equipSlots;
     private int _equipIndex;
 
-    public Inventory(GameObject bazooka, GameObject otherWeapon)
+    public Inventory(GameObject bazooka, GameObject shotgun)
     {
         _equipSlots = new GameObject[2];
         _equipSlots[0] = bazooka;
-        _equipSlots[1] = otherWeapon;
+        _equipSlots[1] = shotgun;
 
-        otherWeapon.SetActive(false);
+        shotgun.SetActive(false);
     }
 
     public int EquipNextWeapon()

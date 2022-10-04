@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OtherWeapon : BaseWeapon
+public class Shotgun : BaseWeapon
 {
   //  [SerializeField] private GameObject _muzzleFlash;
     public override GameObject Shoot()

@@ -16,13 +16,17 @@ public class Spawner : MonoBehaviour
             {
                 Transform spawnLocation = _teamSpawns[player.playerIndex].transform.GetChild(i);
                 GameObject newWorm = Instantiate(_worm, spawnLocation.position, spawnLocation.rotation);
+
                 MeshRenderer[] newWormMeshRenderers = newWorm.GetComponentsInChildren<MeshRenderer>();
                 foreach (MeshRenderer renderer in newWormMeshRenderers)
                 {
-                    renderer.material.color = player.teamColor;
+                    if (renderer.gameObject.tag != "Weapon")
+                    {
+                        renderer.material.color = player.teamColor;
+                    }
                 }
-                newWorm.GetComponent<WormController>().Init(player);
 
+                newWorm.GetComponent<WormController>().Init(player);
                 player.worms.Add(newWorm);
                 Debug.Log($"Spawned a worm at {spawnLocation.position}");
             }
