@@ -7,6 +7,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.probuilder@5.0.6/Editor/EditorCore/ProBuilderMeshPreview.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -67,7 +70,7 @@
       <workItem from="1664785119577" duration="2112000" />
       <workItem from="1664787264540" duration="604000" />
       <workItem from="1664804967777" duration="2694000" />
-      <workItem from="1664868089355" duration="14097000" />
+      <workItem from="1664868089355" duration="14678000" />
     </task>
     <servers />
   </component>

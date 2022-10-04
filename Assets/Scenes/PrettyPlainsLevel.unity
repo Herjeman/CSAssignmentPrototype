@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43912232, g: 0.48738217, b: 0.5676369, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -890,7 +890,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 456426764}
   _jumpSound: {fileID: 8300000, guid: 9ff0b414ad986d649bff2c418f69d2fe, type: 3}
+  _jumpSoundVolume: 1
   _landingSound: {fileID: 0}
+  _landingSoundVolume: 1
+  _launchRocket: {fileID: 0}
+  _launchRocketVolume: 1
+  _explosion: {fileID: 0}
+  _explosionVolume: 1
+  _shotgunShot: {fileID: 0}
+  _shotgunShotVolume: 1
+  _shotgunReload: {fileID: 0}
+  _shotgunReloadVolume: 1
 --- !u!82 &456426764
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1329,7 +1339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103ac6c284d64254f933081834ec55a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPrefab: {fileID: 7137015662816982131, guid: c53cf1ecfb83d6b438b93f8e11af1068, type: 3}
+  _pickups: []
+  _spawnPoints: []
+  _turnsManager: {fileID: 0}
 --- !u!4 &564319231
 Transform:
   m_ObjectHideFlags: 0
@@ -1854,8 +1866,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af041821577dea47bcaf2f06031af39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 893138443}
-  _gameUiObject: {fileID: 1455917212}
+  _turnsManager: {fileID: 0}
+  _gameUi: {fileID: 0}
 --- !u!4 &673328308
 Transform:
   m_ObjectHideFlags: 0
@@ -2452,8 +2464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7cadcc5ffe34145bc4a882060dd2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfTurns: 0
-  _activeWormsList: []
   _inputManager: {fileID: 673328307}
   _gameSetUp: {fileID: 893138444}
   _spawner: {fileID: 929148422}
@@ -3552,6 +3562,7 @@ MonoBehaviour:
   _gameOverTextObject: {fileID: 1766082258}
   _controlsExplanation: {fileID: 1373635189}
   _showControlsPrompt: {fileID: 584829431}
+  _nextPlayerText: {fileID: 0}
   gameIsRunning: 1
   gameOverMessage: 
 --- !u!114 &1455917214
