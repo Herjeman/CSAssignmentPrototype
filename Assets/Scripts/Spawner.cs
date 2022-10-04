@@ -18,13 +18,7 @@ public class Spawner : MonoBehaviour
                 GameObject newWorm = Instantiate(_worm, spawnLocation.position, spawnLocation.rotation);
 
                 MeshRenderer[] newWormMeshRenderers = newWorm.GetComponentsInChildren<MeshRenderer>();
-                foreach (MeshRenderer renderer in newWormMeshRenderers)
-                {
-                    if (renderer.gameObject.tag != "Weapon")
-                    {
-                        renderer.material.color = player.teamColor;
-                    }
-                }
+                ApplyTeamColor(newWormMeshRenderers, player.teamColor);
 
                 newWorm.GetComponent<WormController>().Init(player);
                 player.worms.Add(newWorm);
@@ -32,6 +26,17 @@ public class Spawner : MonoBehaviour
             }
         }
         return playerList;
+    }
+
+    private void ApplyTeamColor(MeshRenderer[] meshRenderers, Color teamColor)
+    {
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            if (renderer.gameObject.tag != "Weapon")
+            {
+                renderer.material.color = teamColor;
+            }
+        }
     }
 
 }
