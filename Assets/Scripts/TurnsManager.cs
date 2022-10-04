@@ -59,7 +59,7 @@ public class TurnsManager : MonoBehaviour
     {
         if (_runTurnTimer)
         {
-        _timer -= Time.deltaTime;
+            _timer -= Time.deltaTime;
             if (_timer <= 0)
             {
                 if (UpdateTurn())

@@ -4952,3 +4952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac70770f71dc7d4fb4b2fb88509d0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifetime: 0.7
+  _lightLifetime: 0.1
+  _screenShakeTime: 0.06
+  _screenShakeIntensity: 0.56
+  _screenShakeDuration: 0.67

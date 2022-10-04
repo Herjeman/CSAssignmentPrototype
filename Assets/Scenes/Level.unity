@@ -2198,7 +2198,7 @@ MonoBehaviour:
   _launchRocketVolume: 1
   _explosion: {fileID: 8300000, guid: 6394506097dd88e47a8d9727bc56cb14, type: 3}
   _explosionVolume: 1
-  _shotgunShot: {fileID: 8300000, guid: 486c36b3c21bd1c4e91872a699a21343, type: 3}
+  _shotgunShot: {fileID: 8300000, guid: 8815211152899c14fb8c52a04d03ee2a, type: 3}
   _shotgunShotVolume: 1
   _shotgunReload: {fileID: 8300000, guid: 3e627206013d8f449a5b21dde1f5da57, type: 3}
   _shotgunReloadVolume: 1

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraOrbit : MonoBehaviour
@@ -18,11 +19,23 @@ public class CameraOrbit : MonoBehaviour
     private Vector3 _cameraPosition;
     private float _cameraDistance;
 
+    private Vector3 _shakeOffset;
+    private float _shakeMaxValue;
+    private float _shakeTimer;
+
+    private static CameraOrbit _instance;
+
     private void Start()
     {
         _turnsManager = _gameManager.GetComponent<TurnsManager>();
         TurnsManager.OnTurnEnd += UpdateActivePlayer;
         _targetTransform = _turnsManager.GetActiveWorm().transform;
+        _instance = this;
+    }
+
+    public static CameraOrbit GetInstance()
+    {
+        return _instance;
     }
 
     private void LateUpdate()
@@ -37,6 +50,9 @@ public class CameraOrbit : MonoBehaviour
 
         _cameraPosition = _targetTransform.position + _offset * _cameraDistance;
 
+        UpdateScreenShake();
+        _cameraPosition += transform.rotation * _shakeOffset;
+
         transform.position = _cameraPosition;
         transform.LookAt(_targetTransform.position); // maybe Lerp this?
     }
@@ -44,6 +60,24 @@ public class CameraOrbit : MonoBehaviour
     private void UpdateActivePlayer()
     {
         _targetTransform = _turnsManager.GetActiveWorm().transform;
+    }
+
+    private void UpdateScreenShake()
+    {
+        if (_shakeTimer > 0)
+        {
+            _shakeMaxValue -= _shakeTimer * 0.01f;
+            _shakeOffset = new Vector3(Random.Range(-_shakeMaxValue, _shakeMaxValue), Random.Range(-_shakeMaxValue, _shakeMaxValue), 0);
+            _shakeTimer -= Time.deltaTime;
+            Debug.Log($"Applied screenshake, shake offset is now {_shakeOffset}");
+        }
+    }
+
+
+    public void ApplyScreenShake(float intensity, float decay)
+    {
+        _shakeTimer = decay;
+        _shakeMaxValue = intensity;
     }
 
     private void OnDestroy()

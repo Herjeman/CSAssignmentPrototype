@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Destructible
   - Pickup
+  - Weapon
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
