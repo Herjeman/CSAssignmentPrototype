@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class WormController : MonoBehaviour
     [SerializeField][Range(0f, 1f)] private float _frictionIntensity;
     [SerializeField] private float _verticalKnockbackModifier;
     [SerializeField] private int _healthPackRestoreAmount;
+    private PlayerAnimations _animator;
 
     private Bazooka _bazooka;
     private Shotgun _shotgun;
@@ -43,6 +45,8 @@ public class WormController : MonoBehaviour
     private bool _didAction;
     private bool _hasAmmo = true;
 
+    private bool _isInAir;
+    
     [SerializeField] private RawImage _pointer;
     
     private void Start()
@@ -198,11 +202,13 @@ public class WormController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _ySpeed = _jumpHeight;
-            SoundManager.GetInstance().PlayJumpSound();
+            SoundManager.GetInstance().PlayJumpSound(); 
             _animations.PlayJumpAnimation();
         }
+        _isInAir = true;
     }
-
+    
+    
     public void TiltWeapon(float direction)
     {
         _weaponTilt.x = -direction;
@@ -246,6 +252,12 @@ public class WormController : MonoBehaviour
             Destroy(hit.gameObject.transform.parent.gameObject);
             stats.SetHp(stats.GetHp() + _healthPackRestoreAmount);
             _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
+        }
+
+        if (_isInAir)
+        {
+            _animations.PlaySquishAnimation();
+            _isInAir = false;
         }
     }
 

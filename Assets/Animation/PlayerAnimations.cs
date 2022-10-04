@@ -38,6 +38,14 @@ public class PlayerAnimations : MonoBehaviour
     {
         _myWorm.Die();
     }
+
+    public void PlaySquishAnimation()
+    {
+        //_animator.SetTrigger("SquishTrigger");
+        _animator.Play("JumpSquish");
+    }
+
+  
 }
 
 
