@@ -21,8 +21,9 @@ public class WormController : MonoBehaviour
     [SerializeField] private int _healthPackRestoreAmount;
     private PlayerAnimations _animator;
 
-    private Bazooka _bazooka;
-    private Shotgun _shotgun;
+    [SerializeField] private Bazooka _bazooka;
+    [SerializeField] private Shotgun _shotgun;
+    [SerializeField] private Bazooka _ccLauncher;
     private int _equippedWeaponIndex;
 
     private FaceSwapper _faceSwapper;
@@ -54,11 +55,9 @@ public class WormController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _faceSwapper = GetComponentInChildren<FaceSwapper>();
         _animations = GetComponentInChildren<PlayerAnimations>();
-        _bazooka = GetComponentInChildren<Bazooka>();
-        _shotgun = GetComponentInChildren<Shotgun>();
         _hpBar = GetComponentInChildren<HpBar>();
 
-        _inventory = new Inventory(_bazooka.gameObject, _shotgun.gameObject);
+        _inventory = new Inventory(_bazooka.gameObject, _shotgun.gameObject, _ccLauncher.gameObject);
         stats = new Stats(_startingHp);
 
         _slowMoveSpeed = _moveSpeed * 0f;
@@ -119,8 +118,6 @@ public class WormController : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-
     private void ApplyGravity()
     { 
         if (!_characterController.isGrounded)
@@ -151,6 +148,7 @@ public class WormController : MonoBehaviour
     {
         _bazooka.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
         _shotgun.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
+        _ccLauncher.transform.Rotate(_weaponTilt * _weaponTiltSpeed);
     }
 
     public void Shoot()
@@ -160,9 +158,14 @@ public class WormController : MonoBehaviour
             _bazooka.StartCharge();
             EnterChargeState();
         }
-        else if (!_didAction && _equippedWeaponIndex == 1)
+        else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
         {
             _shotgun.StartCharge();
+            EnterChargeState();
+        }
+        else if (!_didAction && _equippedWeaponIndex == 2 && _hasAmmo)
+        {
+            _ccLauncher.StartCharge();
             EnterChargeState();
         }
     }
@@ -177,6 +180,11 @@ public class WormController : MonoBehaviour
         else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
         {
             _shotgun.Shoot();
+            ExitChargeState();
+        }
+        else if (!_didAction && _equippedWeaponIndex == 2 && _hasAmmo)
+        {
+            _ccLauncher.Shoot();
             ExitChargeState();
         }
     }

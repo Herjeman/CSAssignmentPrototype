@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.4811321, g: 0.12482201, b: 0.12932764, a: 1}
+      maxColor: {r: 0.9339623, g: 0.7904966, b: 0.21586865, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4873,7 +4873,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51a69ee7d8fefd4478b2becea4a14991, type: 2}
+  - {fileID: 2100000, guid: 6310d618d70b2654dba9a259720a97f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4905,9 +4905,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3509873270092043598}
   - component: {fileID: 742649315130612802}
-  - component: {fileID: 4268336843235700358}
+  - component: {fileID: 2261180863151029772}
   m_Layer: 0
-  m_Name: Rocket 1
+  m_Name: CCProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4947,7 +4947,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &4268336843235700358
+--- !u!114 &2261180863151029772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4956,13 +4956,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3509873270092043599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90d09bb0fb388f3479c4dae73b227df5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1ecaef2782f6c4695d9682c678ec0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _noseTransform: {fileID: 3509873271103654069}
-  _explosion: {fileID: 8962193319286698410, guid: 1fb8b928f37bd5a43b8592adb2ad3ed2, type: 3}
-  _screenShakeIntensity: 0.5
-  _screenShakeTime: 5
+  blastRadius: 0
+  baseDamage: 0
+  fixedDamage: 0
+  shootingPlayer: {fileID: 0}
+  soundManager: {fileID: 0}
+  _clusterCharge: {fileID: 2482969849830750813, guid: cfc4eff259d383245be6e0649efc1c17, type: 3}
+  _releaseParticles: {fileID: 9212092943627571010, guid: 860abf86b0ddffe45ace3907d24a6101, type: 3}
 --- !u!1 &3509873271103654070
 GameObject:
   m_ObjectHideFlags: 0

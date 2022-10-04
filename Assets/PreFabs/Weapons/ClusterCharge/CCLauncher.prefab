@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6502655942027912257}
   - component: {fileID: 7054297476069503957}
   m_Layer: 0
-  m_Name: Bazooka
+  m_Name: CCLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,13 +76,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958d6d786fc7e244a9a65a0b4d6cdc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rocket: {fileID: 3509873270092043599, guid: 18ff9cbcc200d2e46a9224bdaa64ee6b, type: 3}
+  _rocket: {fileID: 3509873270092043599, guid: ef6430ee8ebe997469a20d6fb05ff216, type: 3}
   _chargeIndicator: {fileID: 7570252479019065952}
   _spawnPoint: {fileID: 4001367316126392479}
   _charge: 10
   _force: 15
-  _blastRadius: 10
-  _blastBaseDamage: 50
+  _blastRadius: 5
+  _blastBaseDamage: 30
+  _fixedDamage: 5
 --- !u!1 &7570252479019065952
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,10 +394,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -1439730007547781893, guid: 9cd08a422a29b404ea681889b264c562, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1748a3b13ad6aa47b822d6eaf39745a, type: 2}
     - target: {fileID: 919132149155446097, guid: 9cd08a422a29b404ea681889b264c562, type: 3}
       propertyPath: m_Name
       value: Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 9cd08a422a29b404ea681889b264c562, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1748a3b13ad6aa47b822d6eaf39745a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cd08a422a29b404ea681889b264c562, type: 3}
 --- !u!4 &530537887483748537 stripped

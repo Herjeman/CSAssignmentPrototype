@@ -12,6 +12,7 @@ public class Bazooka  : BaseWeapon
     [SerializeField] private float _force;
     [SerializeField] private float _blastRadius;
     [SerializeField] private int _blastBaseDamage;
+    [SerializeField] private int _fixedDamage;
 
     private float _chargeTimer;
     private float _maxCharge = 3;
@@ -29,7 +30,7 @@ public class Bazooka  : BaseWeapon
     {
         GameObject launchedRocket = Instantiate(_rocket, _spawnPoint.position, transform.rotation);
         launchedRocket.GetComponent<Rigidbody>().AddForce(transform.forward * _force, ForceMode.Impulse);
-        launchedRocket.GetComponent<RocketBehaviour>().Init(transform.parent.gameObject, _blastRadius, _blastBaseDamage);
+        launchedRocket.GetComponent<BaseProjectile>().Init(transform.parent.gameObject, _blastRadius, _blastBaseDamage, _fixedDamage);
         _charging = false;
         _chargeIndicator.SetActive(false);
         return launchedRocket;
