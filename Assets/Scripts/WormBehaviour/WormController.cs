@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WormController : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class WormController : MonoBehaviour
     private bool _didAction;
     private bool _hasAmmo = true;
 
+    [SerializeField] private RawImage _pointer;
+    
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -63,6 +66,7 @@ public class WormController : MonoBehaviour
         _animations.Init(this);
 
         TurnsManager.OnTurnEnd += Deactivate;
+        _pointer.color = _controllingPlayer.teamColor;
     }
 
     public void Init(Player controllingPlayer)
