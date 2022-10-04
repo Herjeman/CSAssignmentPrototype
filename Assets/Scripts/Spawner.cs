@@ -38,5 +38,4 @@ public class Spawner : MonoBehaviour
             }
         }
     }
-
 }

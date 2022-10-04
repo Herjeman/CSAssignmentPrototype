@@ -5,11 +5,11 @@ public static class ImpactCalculator
     public static Impact GetImpact(Vector3 origin, Vector3 target, float radius)
     {
         float distance = GetDistance(origin, target);
-        distance = NormalizeDistance(distance, radius);
+        float intensity = GetForce(NormalizeDistance(distance, radius));
 
         Vector3 direction = GetDirection(origin, target);
 
-        Impact impact = new Impact(distance, direction);
+        Impact impact = new Impact(intensity, direction);
         return impact;
     }
 
@@ -26,6 +26,11 @@ public static class ImpactCalculator
 
     private static float NormalizeDistance(float distance, float maxDistance)
     {
-        return 1 - distance / maxDistance; // doing cool math here could be appropriate
+        return distance / maxDistance;
+    }
+
+    private static float GetForce(float normalizedDistance)
+    {
+        return 1 - normalizedDistance * normalizedDistance;
     }
 }

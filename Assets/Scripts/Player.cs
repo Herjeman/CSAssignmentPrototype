@@ -30,7 +30,6 @@ public class Player
 
     public GameObject GetWorm()
     {
-
         return worms[nextWorm];
     }
 
