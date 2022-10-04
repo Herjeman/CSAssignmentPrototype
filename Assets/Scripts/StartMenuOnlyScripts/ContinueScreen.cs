@@ -8,12 +8,6 @@ public class ContinueScreen : MonoBehaviour
 {
 
 
-
-
-
-
-
-
     public void Continue()
     {
 
