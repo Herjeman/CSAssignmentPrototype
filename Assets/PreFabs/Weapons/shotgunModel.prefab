@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2c189bfb01bd343b0f9b02f5c92d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _muzzleFlash: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
 --- !u!1001 &1284837035888888045
 PrefabInstance:
   m_ObjectHideFlags: 0

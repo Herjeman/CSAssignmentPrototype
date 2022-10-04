@@ -200,6 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2c189bfb01bd343b0f9b02f5c92d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _muzzleFlash: {fileID: 100002, guid: d39ab699aa314a147969fd483aa55205, type: 3}
+  _attackPoint: {fileID: 0}
 --- !u!1 &1518621993283509495
 GameObject:
   m_ObjectHideFlags: 0

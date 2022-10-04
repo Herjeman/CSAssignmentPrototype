@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Shotgun : BaseWeapon
 {
-  //  [SerializeField] private GameObject _muzzleFlash;
+    [SerializeField] private GameObject _muzzleFlash;
+    [SerializeField] private Transform _attackPoint;
+    private bool _isCreated;
     public override GameObject Shoot()
     {
-        
-        //SpawnMuzzleFlashEffect();
+        _isCreated = false;
         RaycastHit hit;
         SoundManager.GetInstance().PlayShotgunShotSound();
+        SpawnMuzzleFlashEffect();
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
@@ -21,6 +23,7 @@ public class Shotgun : BaseWeapon
             }
         }
         return new GameObject();
+        
     }
 
     public override void StartCharge()
@@ -28,8 +31,12 @@ public class Shotgun : BaseWeapon
         SoundManager.GetInstance().PlayShotgunReloadSound();
     }
     
-    // private void SpawnMuzzleFlashEffect()
-    // {
-    //     Instantiate(_muzzleFlash, transform.position, Quaternion.identity);
-    // }
+    public void SpawnMuzzleFlashEffect()
+    {
+        if (!_isCreated)
+        {
+             GameObject currentShot  =  Instantiate(_muzzleFlash, _attackPoint.position, Quaternion.identity);
+            _isCreated = true;
+        }
+    }
 }
