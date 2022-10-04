@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private List<Color> _colors;
     [SerializeField] private TMP_Text _numberOfWormsText;
     [SerializeField] private string _scene;
+    [SerializeField] public GameObject controllScreen;
 
     private int _wormsPerPlayer;
     private int _numberOfPlayers;
@@ -47,10 +48,13 @@ public class MainMenu : MonoBehaviour
         _instructions.wormsPerPlayer = _wormsPerPlayer;
         _instructions.playerNames = names;
         _instructions.colors = colors;
-        
-        Cursor.visible = false;
+
+        this.gameObject.SetActive(false);
+        controllScreen.SetActive(true);
+
+        /*Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
-        SceneManager.LoadScene(_scene);
+        SceneManager.LoadScene(_scene);*/
     }
 
     public void AddNewPlayer()
