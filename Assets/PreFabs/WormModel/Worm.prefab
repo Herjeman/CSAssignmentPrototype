@@ -1607,7 +1607,7 @@ MonoBehaviour:
   _moveSpeed: 0.15
   _rotationSpeed: 2
   _startingHp: 100
-  _minimumYLevel: 5
+  _minimumYLevel: 14
   _jumpHeight: 0.2
   _gravityAccelleration: 0.01
   _weaponTiltSpeed: 1.5
