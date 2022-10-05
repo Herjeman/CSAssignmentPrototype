@@ -83,6 +83,7 @@ public class TurnsManager : MonoBehaviour
 
         _currentPlayer.NextWorm();
         _activeWorm = _currentPlayer.GetWorm();
+        _activeWorm.GetComponent<WormController>().UpdateNoAmmo();
         _timer = _turnTime;
         _turnNumber++;
         StopTurnTimer();

@@ -26,8 +26,6 @@ public class WormController : MonoBehaviour
     [SerializeField] private Shotgun _shotgun;
     [SerializeField] private Bazooka _ccLauncher;
 
-    [SerializeField] private GameUI _gameUi;
-
     private int _equippedWeaponIndex;
 
     private FaceSwapper _faceSwapper;
@@ -232,13 +230,18 @@ public class WormController : MonoBehaviour
     public void NextWeapon()
     {
         _equippedWeaponIndex = _inventory.EquipNextWeapon();
+        UpdateNoAmmo();
+    }
+
+    public void UpdateNoAmmo()
+    {
         if (!_controllingPlayer.HasPickedAmmo && _equippedWeaponIndex > 0)
         {
-            _gameUi.ShowNoAmmo();
+            GameUI.GetInstance().ShowNoAmmo();
         }
         else
         {
-            _gameUi.HideNoAmmo();
+            GameUI.GetInstance().HideNoAmmo();
         }
     }
 
@@ -273,7 +276,7 @@ public class WormController : MonoBehaviour
         {
             Destroy(hit.gameObject.transform.parent.gameObject);
             _controllingPlayer.HasPickedAmmo = true;
-            _gameUi.HideNoAmmo();
+            GameUI.GetInstance().HideNoAmmo();
         }
 
         if (_isInAir)

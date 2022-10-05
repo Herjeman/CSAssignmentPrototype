@@ -23,14 +23,21 @@ public class GameUI : MonoBehaviour
     private TurnsManager _turnsManager;
     private TextMeshProUGUI _timerText;
     private TextMeshProUGUI _gameOverMessage;
+    private static GameUI _instance;
 
     private void Awake()
     {
         _timerText = _uiTimer.GetComponent<TextMeshProUGUI>(); // serialize these
         _gameOverMessage = _gameOverTextObject.GetComponent<TextMeshProUGUI>();
         _turnsManager = TurnsManager.GetInstance();
+        _instance = this;
         TurnsManager.OnTurnEnd += ShowNextPlayerScreen;
         TurnsManager.OnTurnStart += HideNextPlayerScreen;
+    }
+
+    public static GameUI GetInstance()
+    {
+        return _instance;
     }
 
     public void ToggleControlsExplanation()
