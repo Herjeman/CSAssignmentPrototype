@@ -12,6 +12,6 @@ public class StartButton : MonoBehaviour
 
     public void ButtonPushed()
     {
-        _mainMenu.StartGame();
+        _mainMenu.ShowTutorialScreen();
     }
 }

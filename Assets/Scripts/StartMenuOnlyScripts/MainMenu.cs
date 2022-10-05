@@ -12,7 +12,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private List<Color> _colors;
     [SerializeField] private TMP_Text _numberOfWormsText;
     [SerializeField] private string _scene;
-    [SerializeField] public GameObject controllScreen;
+
+    [SerializeField] private GameObject _mainMenuScreen;
+    [SerializeField] private GameObject _controlScreen;
+    [SerializeField] private GameObject _weaponScreen;
 
     private int _wormsPerPlayer;
     private int _numberOfPlayers;
@@ -33,7 +36,7 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public void StartGame()
+    public void ShowTutorialScreen()
     {
         Debug.Log($"Starting game with {_numberOfPlayers} players");
         List<string> names = new List<string>();
@@ -49,12 +52,21 @@ public class MainMenu : MonoBehaviour
         _instructions.playerNames = names;
         _instructions.colors = colors;
 
-        this.gameObject.SetActive(false);
-        controllScreen.SetActive(true);
+        _mainMenuScreen.SetActive(false);
+        _controlScreen.SetActive(true);
+    }
 
-        /*Cursor.visible = false;
+    public void NextTutorialScreen()
+    {
+        _controlScreen.SetActive(false);
+        _weaponScreen.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
-        SceneManager.LoadScene(_scene);*/
+        SceneManager.LoadScene(_scene);
     }
 
     public void AddNewPlayer()
