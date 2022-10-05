@@ -13,6 +13,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject _gameOverTextObject;
     [SerializeField] private GameObject _controlsExplanation;
     [SerializeField] private GameObject _showControlsPrompt;
+    [SerializeField] private GameObject _noAmmo;
     [SerializeField] private TextMeshProUGUI _nextPlayerText;
 
 
@@ -45,6 +46,16 @@ public class GameUI : MonoBehaviour
             _showControlsPrompt.SetActive(false);
         }
 
+    }
+
+    public void ShowNoAmmo()
+    {
+        _noAmmo.SetActive(true);
+    }
+
+    public void HideNoAmmo()
+    {
+        _noAmmo.SetActive(false);
     }
 
     private void HideNextPlayerScreen()
