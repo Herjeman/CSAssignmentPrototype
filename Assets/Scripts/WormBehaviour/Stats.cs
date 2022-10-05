@@ -20,6 +20,10 @@ public class Stats
 
     public void TakeDamage(int damage)
     {
+        if (damage < 0)
+        {
+            return;
+        }
         _hp -= damage;
         Debug.Log($"Took {damage} points of damage, HP is now:{_hp}");
     }
