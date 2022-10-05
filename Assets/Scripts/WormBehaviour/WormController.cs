@@ -276,6 +276,7 @@ public class WormController : MonoBehaviour
         {
             Destroy(hit.gameObject.transform.parent.gameObject);
             _controllingPlayer.HasPickedAmmo = true;
+            SoundManager.GetInstance().PlayShotgunReloadSound();
             GameUI.GetInstance().HideNoAmmo();
         }
 
