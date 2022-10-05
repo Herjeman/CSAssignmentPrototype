@@ -172,10 +172,6 @@ public class WormController : MonoBehaviour
         {
             _ccLauncher.StartCharge();
             EnterChargeState();
-<<<<<<< Updated upstream
-           
-=======
->>>>>>> Stashed changes
         }
     }
 
