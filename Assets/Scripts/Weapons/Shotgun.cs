@@ -27,8 +27,7 @@ public class Shotgun : BaseWeapon
         }
 
         CameraOrbit.GetInstance().ApplyScreenShake(_screenShakeIntensity, _screenShakeDuration);
-        return new GameObject();
-        
+        return new GameObject();     
     }
 
     public override void StartCharge()

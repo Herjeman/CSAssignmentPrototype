@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
                 _turnsManager.StartNewTurn();
             }
         }
-           _gameUi.GoToMainMenu();
+        _gameUi.GoToMainMenu();
     }
 
     public void Move(InputAction.CallbackContext context) //also rotates...

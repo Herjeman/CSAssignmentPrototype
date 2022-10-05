@@ -69,7 +69,6 @@ public class CameraOrbit : MonoBehaviour
             _shakeMaxValue -= _shakeTimer * 0.01f;
             _shakeOffset = new Vector3(Random.Range(-_shakeMaxValue, _shakeMaxValue), Random.Range(-_shakeMaxValue, _shakeMaxValue), 0);
             _shakeTimer -= Time.deltaTime;
-            Debug.Log($"Applied screenshake, shake offset is now {_shakeOffset}");
         }
     }
 

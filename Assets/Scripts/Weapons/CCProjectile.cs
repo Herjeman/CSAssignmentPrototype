@@ -7,6 +7,9 @@ public class CCProjectile : BaseProjectile
 {
     [SerializeField] private GameObject _clusterCharge;
     [SerializeField] private GameObject _releaseParticles;
+    [SerializeField] private float _explosionDelay;
+    [SerializeField] private float _explosionSequenceSpeed;
+
     private Rigidbody _myRigidbody;
     private float _timer;
 
@@ -27,12 +30,17 @@ public class CCProjectile : BaseProjectile
 
     private void ReleaseCharge()
     {
-        GameObject charge = Instantiate(_clusterCharge, transform.position, transform.rotation);
-        Rigidbody[] chargeRigidbodies = charge.GetComponentsInChildren<Rigidbody>();
+        GameObject chargeCluster = Instantiate(_clusterCharge, transform.position, transform.rotation);
+        Rigidbody[] chargeRigidbodies = chargeCluster.GetComponentsInChildren<Rigidbody>();
+        float delay = _explosionDelay;
+
         foreach (Rigidbody rb in chargeRigidbodies)
         {
             rb.velocity = _myRigidbody.velocity;
+            rb.GetComponent<CCCharge>().Init(delay, blastRadius, baseDamage, fixedDamage);
+            delay += _explosionSequenceSpeed;
         }
+
         Instantiate(_releaseParticles, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }

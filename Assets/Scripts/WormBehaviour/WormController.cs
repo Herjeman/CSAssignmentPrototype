@@ -257,9 +257,7 @@ public class WormController : MonoBehaviour
         }
         else if (hit.gameObject.tag == "Pickup") // do ammo pickup
         {
-            Destroy(hit.gameObject.transform.parent.gameObject);
-            stats.SetHp(stats.GetHp() + _healthPackRestoreAmount);
-            _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
+            //_controllingPlayer.HasAmmo = true;
         }
 
         if (_isInAir)

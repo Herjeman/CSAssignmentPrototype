@@ -8,6 +8,10 @@ public class BazookaProjectile : BaseProjectile
     [SerializeField] private Transform _noseTransform;
     [SerializeField] private GameObject _explosion;
 
+    [SerializeField] private float _screenshakeTime = 0.1f;
+    [SerializeField] private float _screenshakeIntensity = 1;
+    [SerializeField] private float _screenshakeDuration = 1;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.transform.parent == null)
@@ -49,6 +53,7 @@ public class BazookaProjectile : BaseProjectile
 
     private void SpawnExplosionEffect()
     {
-        Instantiate(_explosion, transform.position, Quaternion.identity);
+        ExplosionBehaviour explosion = Instantiate(_explosion, transform.position, Quaternion.identity).GetComponent<ExplosionBehaviour>();
+        explosion.Init(_screenshakeTime, _screenshakeIntensity, _screenshakeDuration);
     }
 }

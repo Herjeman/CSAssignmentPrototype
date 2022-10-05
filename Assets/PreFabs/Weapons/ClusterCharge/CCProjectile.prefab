@@ -4966,6 +4966,8 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   _clusterCharge: {fileID: 2482969849830750813, guid: cfc4eff259d383245be6e0649efc1c17, type: 3}
   _releaseParticles: {fileID: 9212092943627571010, guid: 860abf86b0ddffe45ace3907d24a6101, type: 3}
+  _explosionDelay: 1.5
+  _explosionSequenceSpeed: 0.1
 --- !u!1 &3509873271103654070
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,12 +8,12 @@ public class ExplosionBehaviour : MonoBehaviour
     private float _timer;
     [SerializeField] private float _lifetime = 0.7f;
     [SerializeField] private float _lightLifetime = 0.1f;
-    [SerializeField] private float _screenShakeTime = 0.1f;
     private bool _hasLight;
     private bool _appliedScreenShake;
 
-    [SerializeField] private float _screenShakeIntensity = 1;
-    [SerializeField] private float _screenShakeDuration = 5;
+    private float _screenshakeTime = 0.1f;
+    private float _screenshakeIntensity = 1;
+    private float _screenshakeDuration = 1;
     private Light _pointLight;
 
     private void Awake()
@@ -27,6 +27,14 @@ public class ExplosionBehaviour : MonoBehaviour
         }
     }
 
+    public void Init(float screenshakeTime=0.1f, float screenshakeIntensity=1, float screenshakeDuration=1 )
+    {
+        _screenshakeTime = screenshakeTime;
+        _screenshakeIntensity = screenshakeIntensity;
+        _screenshakeDuration = screenshakeDuration;
+
+    }
+
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -34,9 +42,9 @@ public class ExplosionBehaviour : MonoBehaviour
         {
             _pointLight.intensity = 0;
         }
-        if (!_appliedScreenShake && _timer > _screenShakeTime)
+        if (!_appliedScreenShake && _timer > _screenshakeTime)
         {
-            CameraOrbit.GetInstance().ApplyScreenShake(_screenShakeIntensity, _screenShakeDuration);
+            CameraOrbit.GetInstance().ApplyScreenShake(_screenshakeIntensity, _screenshakeDuration);
             _appliedScreenShake = true;
         }
         if (_timer > _lifetime)

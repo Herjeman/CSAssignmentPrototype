@@ -127,6 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0a30cd6ca657f499fad3ef4e723a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _explosion: {fileID: 8962193319286698410, guid: f54d0652b1e685446a03ab4e2919004d, type: 3}
+  _screenshakeTime: 0.1
+  _screenshakeIntensity: 0.5
+  _screenshakeDuration: 0.5
 --- !u!1 &8421447571219954854
 GameObject:
   m_ObjectHideFlags: 0
