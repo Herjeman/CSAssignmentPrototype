@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,11 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        PlayBirdSounds();
+    }
+
     public static SoundManager GetInstance()
     {
         return instance;
@@ -77,7 +83,7 @@ public class SoundManager : MonoBehaviour
         _audioSource.PlayOneShot(_shotgunReload, _shotgunReloadVolume);
     }
     
-    public void PlayBirdSunds()
+    public void PlayBirdSounds()
     {
         _audioSource.PlayOneShot(_birdsSound, _birdsSoundVolume);
     }
