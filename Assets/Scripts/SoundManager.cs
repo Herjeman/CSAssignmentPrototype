@@ -26,6 +26,9 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioClip _shotgunReload;
     [SerializeField] private float _shotgunReloadVolume = 1;
+    
+    [SerializeField] private AudioClip _birdsSound;
+    [SerializeField] private float _birdsSoundVolume = 1;
 
     private void Awake()
     {
@@ -72,5 +75,10 @@ public class SoundManager : MonoBehaviour
     public void PlayShotgunReloadSound()
     {
         _audioSource.PlayOneShot(_shotgunReload, _shotgunReloadVolume);
+    }
+    
+    public void PlayBirdSunds()
+    {
+        _audioSource.PlayOneShot(_birdsSound, _birdsSoundVolume);
     }
 }

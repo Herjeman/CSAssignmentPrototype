@@ -21,6 +21,7 @@ public class TurnsManager : MonoBehaviour
     private float _timer;
     private bool _runTurnTimer;
     private int numberOfTurns;
+    private SoundManager _sounds;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class TurnsManager : MonoBehaviour
         _timer = _turnTime;
         _runTurnTimer = false;
         OnTurnEnd();
+        _sounds.PlayBirdSunds();
     }
 
     private void Update() // restructure this if block, it's a mess
