@@ -45,7 +45,7 @@ public class WormController : MonoBehaviour
     private float _zSpeed;
 
     private bool _didAction;
-    private bool _hasAmmo = true;
+   // private bool _hasAmmo = true;
 
     private bool _isInAir;
     
@@ -71,6 +71,8 @@ public class WormController : MonoBehaviour
 
         TurnsManager.OnTurnEnd += Deactivate;
         _pointer.color = _controllingPlayer.teamColor;
+        
+        _controllingPlayer.HasPickedAmmo = false;
     }
 
     public void Init(Player controllingPlayer)
@@ -137,8 +139,7 @@ public class WormController : MonoBehaviour
             _zSpeed = _zSpeed - _zSpeed * _frictionIntensity;
         }
     }
-
-
+    
     private void Move()
     {
         transform.Rotate(0, inputVector.x * _rotationSpeed, 0);
@@ -161,23 +162,17 @@ public class WormController : MonoBehaviour
             _bazooka.StartCharge();
             EnterChargeState();
         }
-        else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
+        else if (!_didAction && _equippedWeaponIndex == 1 && _controllingPlayer.HasPickedAmmo)
         {
-            if ( _controllingPlayer.HasPickedAmmo == true)
-            {
-                _shotgun.StartCharge();
-                EnterChargeState();
-                _controllingPlayer.HasPickedAmmo = false;
-            }
+            _shotgun.StartCharge();
+            EnterChargeState();
+            //_controllingPlayer.HasPickedAmmo = false;
         }
-        else if (!_didAction && _equippedWeaponIndex == 2 && _hasAmmo)
+        else if (!_didAction && _equippedWeaponIndex == 2 && _controllingPlayer.HasPickedAmmo)
         {
-            if ( _controllingPlayer.HasPickedAmmo == true)
-            {
-                _ccLauncher.StartCharge();
-                EnterChargeState();
-                _controllingPlayer.HasPickedAmmo = false;
-            }
+            _ccLauncher.StartCharge();
+            EnterChargeState();
+           // _controllingPlayer.HasPickedAmmo = false;
         }
     }
 
@@ -188,15 +183,17 @@ public class WormController : MonoBehaviour
             _bazooka.Shoot();
             ExitChargeState();
         }
-        else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
+        else if (!_didAction && _equippedWeaponIndex == 1 && _controllingPlayer.HasPickedAmmo)
         {
             _shotgun.Shoot();
             ExitChargeState();
+            _controllingPlayer.HasPickedAmmo = false;
         }
-        else if (!_didAction && _equippedWeaponIndex == 2 && _hasAmmo)
+        else if (!_didAction && _equippedWeaponIndex == 2 && _controllingPlayer.HasPickedAmmo)
         {
             _ccLauncher.Shoot();
             ExitChargeState();
+            _controllingPlayer.HasPickedAmmo = false;
         }
     }
     private void EnterChargeState()
@@ -268,6 +265,7 @@ public class WormController : MonoBehaviour
         {
             Destroy(hit.gameObject.transform.parent.gameObject);
             _controllingPlayer.HasPickedAmmo = true;
+            _shotgun.StartCharge();
 
         }
 
