@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 2812464402667234395}
   m_Layer: 0
   m_Name: AmmoPickup
-  m_TagString: Pickup
+  m_TagString: Ammo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13386,7 +13386,7 @@ GameObject:
   - component: {fileID: 3626146578434504708}
   m_Layer: 0
   m_Name: Base
-  m_TagString: Pickup
+  m_TagString: Ammo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,6 +93,8 @@ public class WormController : MonoBehaviour
         {
             Die();
         }
+
+       
     }
 
     public void FixedUpdate()
@@ -160,13 +163,21 @@ public class WormController : MonoBehaviour
         }
         else if (!_didAction && _equippedWeaponIndex == 1 && _hasAmmo)
         {
-            _shotgun.StartCharge();
-            EnterChargeState();
+            if ( _controllingPlayer.HasPickedAmmo == true)
+            {
+                _shotgun.StartCharge();
+                EnterChargeState();
+                _controllingPlayer.HasPickedAmmo = false;
+            }
         }
         else if (!_didAction && _equippedWeaponIndex == 2 && _hasAmmo)
         {
-            _ccLauncher.StartCharge();
-            EnterChargeState();
+            if ( _controllingPlayer.HasPickedAmmo == true)
+            {
+                _ccLauncher.StartCharge();
+                EnterChargeState();
+                _controllingPlayer.HasPickedAmmo = false;
+            }
         }
     }
 
@@ -246,18 +257,18 @@ public class WormController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-
-        // do landing juice please: https://docs.unity3d.com/ScriptReference/CharacterController.OnControllerColliderHit.html
-
         if (hit.gameObject.tag == "Pickup") // do early return?
         {
+            Debug.Log("Picked HP");
             Destroy(hit.gameObject.transform.parent.gameObject);
             stats.SetHp(stats.GetHp() + _healthPackRestoreAmount);
             _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
         }
-        else if (hit.gameObject.tag == "Pickup") // do ammo pickup
+        else if (hit.gameObject.tag == "Ammo") // do ammo pickup
         {
-            //_controllingPlayer.HasAmmo = true;
+            Destroy(hit.gameObject.transform.parent.gameObject);
+            _controllingPlayer.HasPickedAmmo = true;
+
         }
 
         if (_isInAir)

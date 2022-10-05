@@ -9,6 +9,7 @@ public class Player
     private int nextWorm;
     public Color teamColor;
     public List<GameObject> worms;
+    public bool HasPickedAmmo;
 
     public Player (string name, int index, int numberOfWorms, Color color)
     {
@@ -36,5 +37,7 @@ public class Player
     public void RemoveDeadWorm(GameObject deadWorm) 
     {
         worms.Remove(deadWorm);
+        
     }
+    
 }

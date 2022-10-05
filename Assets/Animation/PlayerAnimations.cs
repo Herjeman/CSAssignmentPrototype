@@ -41,7 +41,6 @@ public class PlayerAnimations : MonoBehaviour
 
     public void PlaySquishAnimation()
     {
-        //_animator.SetTrigger("SquishTrigger");
         _animator.Play("JumpSquish");
     }
 
