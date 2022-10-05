@@ -30,6 +30,9 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField] private AudioClip _birdsSound;
     [SerializeField] private float _birdsSoundVolume = 1;
+    
+    [SerializeField] private AudioClip _collectedHp;
+    [SerializeField] private float _collectedHpVolume = 1;
 
     private void Awake()
     {
@@ -86,5 +89,10 @@ public class SoundManager : MonoBehaviour
     public void PlayBirdSounds()
     {
         _audioSource.PlayOneShot(_birdsSound, _birdsSoundVolume);
+    }
+    
+    public void PlayCollectedHp()
+    {
+        _audioSource.PlayOneShot(_collectedHp, _collectedHpVolume);
     }
 }

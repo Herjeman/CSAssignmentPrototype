@@ -45,9 +45,9 @@ public class WormController : MonoBehaviour
     private float _zSpeed;
 
     private bool _didAction;
-   // private bool _hasAmmo = true;
 
     private bool _isInAir;
+   
     
     [SerializeField] private RawImage _pointer;
     
@@ -95,8 +95,6 @@ public class WormController : MonoBehaviour
         {
             Die();
         }
-
-       
     }
 
     public void FixedUpdate()
@@ -166,13 +164,12 @@ public class WormController : MonoBehaviour
         {
             _shotgun.StartCharge();
             EnterChargeState();
-            //_controllingPlayer.HasPickedAmmo = false;
         }
         else if (!_didAction && _equippedWeaponIndex == 2 && _controllingPlayer.HasPickedAmmo)
         {
             _ccLauncher.StartCharge();
             EnterChargeState();
-           // _controllingPlayer.HasPickedAmmo = false;
+           
         }
     }
 
@@ -256,17 +253,17 @@ public class WormController : MonoBehaviour
     {
         if (hit.gameObject.tag == "Pickup") // do early return?
         {
-            Debug.Log("Picked HP");
             Destroy(hit.gameObject.transform.parent.gameObject);
             stats.SetHp(stats.GetHp() + _healthPackRestoreAmount);
             _hpBar.UpdateHealthBar(stats.GetNormalizedHp());
+            SoundManager.GetInstance().PlayCollectedHp();
+
         }
         else if (hit.gameObject.tag == "Ammo") // do ammo pickup
         {
             Destroy(hit.gameObject.transform.parent.gameObject);
             _controllingPlayer.HasPickedAmmo = true;
-            _shotgun.StartCharge();
-
+            
         }
 
         if (_isInAir)
