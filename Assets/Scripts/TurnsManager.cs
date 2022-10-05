@@ -20,7 +20,7 @@ public class TurnsManager : MonoBehaviour
     private int _currentPlayerIndex;
     private float _timer;
     private bool _runTurnTimer;
-    private int numberOfTurns;
+    private int _turnNumber;
 
     private void Awake()
     {
@@ -51,6 +51,7 @@ public class TurnsManager : MonoBehaviour
         _activeWorm = _currentPlayer.GetWorm();
         _currentPlayer.NextWorm();
         _timer = _turnTime;
+        _turnNumber = 1;
         _runTurnTimer = false;
         OnTurnEnd();
     }
@@ -83,6 +84,7 @@ public class TurnsManager : MonoBehaviour
         _currentPlayer.NextWorm();
         _activeWorm = _currentPlayer.GetWorm();
         _timer = _turnTime;
+        _turnNumber++;
         StopTurnTimer();
         OnTurnEnd();
         return false;
@@ -113,7 +115,7 @@ public class TurnsManager : MonoBehaviour
     {
         bool win = false;
         int playersLeft = _players.Count;
-        foreach (Player player in _players) // simplify by updatinh players list every time a player runs out of worms
+        foreach (Player player in _players) // simplify by updating players list every time a player runs out of worms
         {
             if (player.worms.Count <= 0)
             {
@@ -185,6 +187,16 @@ public class TurnsManager : MonoBehaviour
     public GameObject GetActiveWorm()
     {
         return _activeWorm;
+    }
+
+    public int GetTurnNumber()
+    {
+        return _turnNumber;
+    }
+
+    public int GetNumberOfPlayers()
+    {
+        return _players.Count;
     }
 }
 

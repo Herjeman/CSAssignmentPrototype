@@ -32,8 +32,11 @@ public class PickupManager : MonoBehaviour
 
     private void SpawnRandomPickup()
     {
-        PickupSpawn spawnpoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-        spawnpoint.SpawnPickup(_pickups[Random.Range(0, _pickups.Count)]);
+        if (_turnsManager.GetTurnNumber() > _turnsManager.GetNumberOfPlayers())
+        {
+            PickupSpawn spawnpoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+            spawnpoint.SpawnPickup(_pickups[Random.Range(0, _pickups.Count)]);
+        }
     }
 
     private void OnDestroy()
